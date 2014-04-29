@@ -58,5 +58,6 @@ public final class Constants {
 	public static final int DEFAULT_MIN_YEAR_START = 1900;
 
 	private Constants() {
+		throw new UnsupportedOperationException();
 	}
 }

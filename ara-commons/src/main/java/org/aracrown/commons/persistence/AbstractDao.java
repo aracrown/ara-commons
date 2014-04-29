@@ -18,10 +18,10 @@ package org.aracrown.commons.persistence;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
-import org.aracrown.commons.persistence.exception.EntityConstraintViolationException;
 import org.aracrown.commons.persistence.exception.EntityDeleteException;
 import org.aracrown.commons.persistence.exception.EntityNotFoundException;
 import org.aracrown.commons.persistence.exception.EntitySaveException;
+import org.aracrown.commons.persistence.exception.EntityValidationException;
 import org.aracrown.commons.util.Exceptions;
 import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
@@ -96,15 +96,23 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	 * @param entity
 	 *            object to save
 	 * @return the managed instance that the state was merged to
-	 * @throws EntityConstraintViolationException
-	 *             constraint validation is thrown if was detected by exception handler. Otherwise original exception is re-thrown.
+	 * @throws EntitySaveException
+	 *             exception is thrown if persistence engine was not able to
+	 *             persist the entity.
+	 * @throws EntityValidationException
+	 *             constraint validation is thrown if was detected by exception
+	 *             handler. Otherwise original exception is re-thrown.
 	 */
-	public T save(T entity) throws EntitySaveException {
+	public T save(T entity) throws EntitySaveException, EntityValidationException {
 		T mergedEntity;
 		try {
 			mergedEntity = getEntityManager().merge(entity);
 			getEntityManager().flush();
-            return mergedEntity;
+			return mergedEntity;
+		} catch (javax.validation.ConstraintViolationException e) {
+			String message = String.format("Persistence exception occurred when trying to validate the entity [%s].", entity);
+			LOGGER.debug(message, e);
+			throw new EntityValidationException(message, e.getConstraintViolations());
 		} catch (PersistenceException e) {
 			String message = String.format("Persistence exception occurred when trying to save the entity [%s].", entity);
 			LOGGER.debug(message, e);
@@ -131,7 +139,8 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	 * @param primaryKey
 	 *            the primary key of existing entity instance to be removed
 	 * @throws EntityDeleteException
-	 *             thrown if it was not possible to delete the selected entity due to some reasons
+	 *             thrown if it was not possible to delete the selected entity
+	 *             due to some reasons
 	 */
 	public void deleteById(Object primaryKey) throws EntityDeleteException {
 		try {
@@ -141,10 +150,6 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 			}
 			delete(entityReference);
 			getEntityManager().flush();
-		} catch (javax.persistence.EntityNotFoundException e) {
-			String message = String.format("Entity with primary key [%s] was not found.", primaryKey);
-			LOGGER.debug(message, e);
-			throw new EntityDeleteException(message, e);
 		} catch (PersistenceException e) {
 			String message = String.format("Persistence exception occurred when trying to delete the entity [%s].", primaryKey);
 			LOGGER.debug(message, e);

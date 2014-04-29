@@ -24,7 +24,8 @@ import org.aracrown.commons.util.ConstraintViolationBuilder;
 /**
  * Custom entity constraint violation exception for better readability purposes.
  * <p>
- * It formats all constraints into single ordered string in case we need to display it somewhere, for example testing the output in junit tests
+ * It formats all constraints into single ordered string in case we need to
+ * display it somewhere, for example testing the output in junit tests
  * 
  * @author vicento.ramos
  * 
@@ -48,6 +49,20 @@ public class EntityValidationException extends RuntimeException {
 	 *            set of unsorted violations
 	 */
 	public EntityValidationException(Set<? extends ConstraintViolation<?>> constraintViolations) {
+		this.constraintViolations = constraintViolations;
+	}
+	
+	/**
+	 * Default constructor takes constraint violation collection.
+	 * 
+	 * @param message
+	 *            the detail message. The detail message is saved for later
+	 *            retrieval by the {@link #getMessage()} method.
+	 * @param constraintViolations
+	 *            set of unsorted violations
+	 */
+	public EntityValidationException(String message, Set<? extends ConstraintViolation<?>> constraintViolations) {
+		super(message);
 		this.constraintViolations = constraintViolations;
 	}
 

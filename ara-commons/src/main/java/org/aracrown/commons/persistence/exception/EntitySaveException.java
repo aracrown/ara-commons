@@ -30,16 +30,6 @@ public class EntitySaveException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constructs a new exception with the specified detail message.
-	 * 
-	 * @param message
-	 *            the detail message (which is saved for later retrieval by the Throwable.getMessage() method).
-	 */
-	public EntitySaveException(String message) {
-		super(message);
-	}
-
-	/**
 	 * Constructs a new exception with the specified detail message and cause.
 	 * 
 	 * @param message
