@@ -49,6 +49,13 @@ public interface Query<T> {
 	<Q extends Query<T>> Q page(Long first, Long pageSize);
 
 	/**
+	 * Disable caching for concrete query.
+	 * 
+	 * @return this query instance
+	 */
+	<Q extends Query<T>> Q disableCaching();
+
+	/**
 	 * Execute a SELECT query and return the query results.
 	 * 
 	 * @return a list of the results

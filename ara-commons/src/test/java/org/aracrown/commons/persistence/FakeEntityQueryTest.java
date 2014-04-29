@@ -39,7 +39,7 @@ public class FakeEntityQueryTest extends AbstractDaoTest {
 
 	@Test
 	public void testSingleResult() {
-		Assert.assertNull(new FakeEntityQuery(em).singleResult());
+		Assert.assertNull(new FakeEntityQuery(em).disableCaching().singleResult());
 	}
 
 	@Test

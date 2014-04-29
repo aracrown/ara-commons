@@ -46,9 +46,6 @@ import com.mysema.query.types.path.StringPath;
 public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Query<K> {
 	private static final String ORG_HIBERNATE_CACHEABLE = "org.hibernate.cacheable";
 
-	/** Default page size. */
-	private static final long DEFAULT_PAGE_SIZE = 10L;
-
 	/** The JPA query instance. */
 	private final JPAQuery jpaQuery;
 
@@ -59,11 +56,14 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	private Long first = 0L;
 
 	/** How many items to retrieve. */
-	private Long pageSize = DEFAULT_PAGE_SIZE;
+	private Long pageSize = Constants.DEFAULT_PAGE_SIZE;
 
 	/** Available joins for this query. */
 	private final List<Path<?>> joins = new ArrayList<>();
 
+	/** By default caching is enabled. */
+	private boolean cacheable = true;
+	
 	/**
 	 * Default constructor accepting entity manager and entity path class.
 	 * 
@@ -74,7 +74,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 */
 	public AbstractQuery(EntityManager entityManager, T path) {
 		this.path = path;
-		jpaQuery = new JPAQuery(entityManager).from(path).setHint(ORG_HIBERNATE_CACHEABLE, true);
+		jpaQuery = new JPAQuery(entityManager).from(path);
 	}
 
 	protected <P, Z extends EntityPath<P>> Z validateFrom(Z alias) {
@@ -167,7 +167,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 */
 	@Override
 	public K singleResult() {
-		return jpaQuery.singleResult(path);
+		return jpaQuery.setHint(ORG_HIBERNATE_CACHEABLE, cacheable).singleResult(path);
 	}
 
 	/**
@@ -175,7 +175,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 */
 	@Override
 	public List<K> list() {
-		return jpaQuery.restrict(new QueryModifiers(pageSize, first)).list(path);
+		return jpaQuery.restrict(new QueryModifiers(pageSize, first)).setHint(ORG_HIBERNATE_CACHEABLE, cacheable).list(path);
 	}
 
 	/**
@@ -212,6 +212,16 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	public <Q extends Query<K>> Q page(Long first, Long pageSize) {
 		this.first = first;
 		this.pageSize = pageSize;
+		return (Q) this;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <Q extends Query<K>> Q disableCaching() {
+		this.cacheable = false;
 		return (Q) this;
 	}
 }

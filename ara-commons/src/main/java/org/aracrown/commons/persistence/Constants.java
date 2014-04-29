@@ -56,6 +56,9 @@ public final class Constants {
 	 * Minimum year starts from.
 	 */
 	public static final int DEFAULT_MIN_YEAR_START = 1900;
+	
+	/** Default page size. */
+	public static final long DEFAULT_PAGE_SIZE = 10L;
 
 	private Constants() {
 		throw new UnsupportedOperationException();
