@@ -31,6 +31,19 @@
 		<module>ara-commons</module>
 	</modules>
 	
+	<distributionManagement>
+  		<repository>
+     			<id>deployment</id>
+     			<name>Internal Releases</name>
+     			<url>http://www.aracrown.org/nexus/content/repositories/releases/</url>
+  		</repository>
+  		<snapshotRepository>
+     			<id>deployment</id>
+     			<name>Internal snapshots</name>
+     			<url>http://www.aracrown.org/nexus/content/repositories/snapshots/</url>
+  		</snapshotRepository>
+	</distributionManagement>
+	
 	<dependencyManagement>
 		<dependencies>
 			<!-- Owner => to handle property files -->
