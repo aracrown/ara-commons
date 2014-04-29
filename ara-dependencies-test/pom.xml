@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.aracrown.commons</groupId>
+	<artifactId>ara-dependencies-test</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>ara-dependencies-test</name>
+	<description>Test dependency package.</description>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.version>4.11</junit.version>
+		<openpojo.version>0.5.0</openpojo.version>
+	</properties>
+	
+	<dependencies>
+		<!-- Test utilities -->
+		<dependency>
+			<groupId>com.googlecode.openpojo</groupId>
+			<artifactId>openpojo</artifactId>
+			<version>${openpojo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.177</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>el-api</artifactId>
+			<version>6.0.37</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>0.7.0.201403182114</version>
+						<configuration>
+							<destfile>${basedir}/target/coverage-reports/jacoco-unit.exec</destfile>
+							<datafile>${basedir}/target/coverage-reports/jacoco-unit.exec</datafile>
+							<excludes>
+								<exclude>**/Q*.*</exclude>
+							</excludes>
+						</configuration>
+						<executions>
+							<execution>
+								<id>jacoco-initialize</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>jacoco-site</id>
+								<phase>package</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+						   </execution>
+					  </executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>2.12.1</version>
+						<configuration> 
+							<configLocation>infrastructure/checkstyle/checkstyle.xml</configLocation> 
+							<suppressionsLocation>checkstyle/suppressions.xml</suppressionsLocation> 
+						</configuration> 
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
