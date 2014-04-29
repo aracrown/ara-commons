@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.aracrown.commons.persistence.impl;
+package org.aracrown.commons.persistence;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-
-import org.aracrown.commons.persistence.Query;
 
 import com.mysema.query.QueryModifiers;
 import com.mysema.query.jpa.impl.JPAQuery;

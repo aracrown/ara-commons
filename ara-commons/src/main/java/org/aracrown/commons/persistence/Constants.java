@@ -53,7 +53,7 @@ public final class Constants {
 	public static final int DEFAULT_MAX_QUERY_STRING_LENGTH = 50;
 
 	/**
-	 * Minimum league year starts from.
+	 * Minimum year starts from.
 	 */
 	public static final int DEFAULT_MIN_YEAR_START = 1900;
 

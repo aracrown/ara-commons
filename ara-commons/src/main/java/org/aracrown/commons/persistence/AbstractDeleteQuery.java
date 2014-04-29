@@ -1,4 +1,4 @@
-package org.aracrown.commons.persistence.impl;
+package org.aracrown.commons.persistence;
 
 import javax.persistence.EntityManager;
 
@@ -18,7 +18,7 @@ import com.mysema.query.types.path.EntityPathBase;
  * @param <K>
  *            entity class
  */
-public class AbstractDeleteQuery<T extends EntityPathBase<K>, K> {
+public class AbstractDeleteQuery<T extends EntityPathBase<K>, K> implements DeleteQuery<T>{
 	/** The JPA delete instance. */
 	private final JPADeleteClause deleteClause;
 

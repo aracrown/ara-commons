@@ -81,7 +81,7 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	 * @throws EntityNotFoundException
 	 *             thrown if entity was not found by it's primary key
 	 */
-	public T byId(Object primaryKey) throws EntityNotFoundException {
+	public <PK> T byId(PK primaryKey) throws EntityNotFoundException {
 		T entity = getEntityManager().find(getEntityClass(), primaryKey);
 		if (entity == null) {
 			throw new EntityNotFoundException(String.format("Entity of type [%s] with primary key [%s] was not found.", getEntityClass()
