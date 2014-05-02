@@ -66,19 +66,19 @@
 				<artifactId>gson</artifactId>
 				<version>2.2.4</version>
 			</dependency>
-		
+
 			<!-- Query DSL -->
-			<dependency>
-				<groupId>com.mysema.querydsl</groupId>
-				<artifactId>querydsl-jpa</artifactId>
-				<version>${querydsl.version}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>hibernate-jpa-2.0-api</artifactId>
-						<groupId>org.hibernate.javax.persistence</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>		
+                        <dependency>
+                                <groupId>com.mysema.querydsl</groupId>
+                                <artifactId>querydsl-jpa</artifactId>
+                                <version>${querydsl.version}</version>
+                                <exclusions>
+                                        <exclusion>
+                                                <artifactId>hibernate-jpa-2.0-api</artifactId>
+                                                <groupId>org.hibernate.javax.persistence</groupId>
+                                        </exclusion>
+                                </exclusions>
+                        </dependency>      
 		</dependencies>
 	</dependencyManagement>
 	
