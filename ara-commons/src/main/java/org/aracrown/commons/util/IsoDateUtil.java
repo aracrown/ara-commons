@@ -23,6 +23,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.base.Preconditions;
 
 /**
@@ -36,10 +39,15 @@ import com.google.common.base.Preconditions;
  * 
  */
 public final class IsoDateUtil {
-	
-	/** Support for date and time with 'HHmm', for example, '2010-01-01T10:00:00+0200'*/
+	/** The logger instance. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(IsoDateUtil.class);
+
+	/**
+	 * Support for date and time with 'HHmm', for example,
+	 * '2010-01-01T10:00:00+0200'
+	 */
 	private static final String ISO_OFFSET_DATE_TIME_XX = "yyyy-MM-dd'T'HH:mm:ssXX";
-	
+
 	/** The singleton instance. */
 	private static IsoDateUtil instance;
 
@@ -65,13 +73,14 @@ public final class IsoDateUtil {
 	 *            provided date to format
 	 * @param timeZone
 	 *            provided time zone to use
-	 * @return formatted date in ISO format (yyyy-MM-dd'T'HH:mm:ss.SSS zzz) and provided time zone
+	 * @return formatted date in ISO format (yyyy-MM-dd'T'HH:mm:ss.SSS zzz) and
+	 *         provided time zone
 	 */
 	public String format(ZonedDateTime date, ZoneId timeZone) {
 		Preconditions.checkNotNull(date, "Date parameter is missing.");
-		
+
 		DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder().append(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-		
+
 		return builder.toFormatter().format(date.withZoneSameInstant(timeZone));
 	}
 
@@ -80,14 +89,16 @@ public final class IsoDateUtil {
 	 * 
 	 * @param date
 	 *            provided date to format
-	 * @return formatted date in ISO format (yyyy-MM-dd'T'HH:mm:ss.SSS zzz) and UTC time zone
+	 * @return formatted date in ISO format (yyyy-MM-dd'T'HH:mm:ss.SSS zzz) and
+	 *         UTC time zone
 	 */
 	public String format(ZonedDateTime date) {
 		return format(date, ZoneOffset.UTC);
 	}
 
 	/**
-	 * Takes existing date in ISO format and converts it into different time zone.
+	 * Takes existing date in ISO format and converts it into different time
+	 * zone.
 	 * 
 	 * @param gameDate
 	 *            ISO date as a String which should be parsed.
@@ -100,30 +111,29 @@ public final class IsoDateUtil {
 	public String format(String gameDate, ZoneId timeZone) throws ParseException {
 		return format(parse(gameDate), timeZone);
 	}
-	
+
 	/**
 	 * 
 	 * @param date
 	 *            ISO date as a String which should be parsed.
 	 * @return A Date parsed from the string.
-	 * @throws DateTimeParseException
-	 *             if specified string cannot be parsed.
 	 */
-	public ZonedDateTime parse(String date) throws DateTimeParseException {
+	public ZonedDateTime parse(String date) {
 		try {
 			return parseDefault(date);
 		} catch (DateTimeParseException e) {
+			LOGGER.debug("Default date parsing failed.", e);
 			return parseCustom(date);
 		}
 	}
-	
+
 	private ZonedDateTime parseCustom(String dateString) {
-		DateTimeFormatter df = new DateTimeFormatterBuilder().appendPattern(ISO_OFFSET_DATE_TIME_XX).toFormatter();				
+		DateTimeFormatter df = new DateTimeFormatterBuilder().appendPattern(ISO_OFFSET_DATE_TIME_XX).toFormatter();
 		return ZonedDateTime.parse(dateString, df);
 	}
 
 	private ZonedDateTime parseDefault(String dateString) {
-		DateTimeFormatter df = new DateTimeFormatterBuilder().append(DateTimeFormatter.ISO_OFFSET_DATE_TIME).toFormatter();		
+		DateTimeFormatter df = new DateTimeFormatterBuilder().append(DateTimeFormatter.ISO_OFFSET_DATE_TIME).toFormatter();
 		return ZonedDateTime.parse(dateString, df);
 	}
 }
