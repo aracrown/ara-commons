@@ -77,16 +77,18 @@ public final class ConstraintViolationBuilder {
 		/** Sorting just for unit testing purposes */
 		List<ConstraintViolation<?>> constraintViolations1 = new ArrayList<>(constraintViolations);
 
-        Collections.sort(constraintViolations1, (ConstraintViolation<?> o1, ConstraintViolation<?> o2) -> o1.toString().compareTo(o2.toString()));
+		Collections.sort(constraintViolations1, (ConstraintViolation<?> o1, ConstraintViolation<?> o2) -> o1.toString().compareTo(o2.toString()));
 
 		StringBuilder constraintViolationBuilder = new StringBuilder();
-		for (ConstraintViolation<?> constraintViolation : constraintViolations1) {
+		
+		constraintViolations1.forEach((constraintViolation) -> {
 			if (constraintViolationBuilder.length() > 0) {
 				constraintViolationBuilder.append(VIOLATION_SEPARATOR);
 			}
 			String message = constraintViolation.getMessage();
 			constraintViolationBuilder.append(message);
-		}
+		});
+
 		return constraintViolationBuilder;
 	}
 }
