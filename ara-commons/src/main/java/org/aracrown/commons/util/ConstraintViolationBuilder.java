@@ -15,11 +15,12 @@
  */
 package org.aracrown.commons.util;
 
-import javax.validation.ConstraintViolation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
+import javax.validation.ConstraintViolation;
 
 /**
  * Simple wrapper of bean validation constraints.
@@ -80,8 +81,8 @@ public final class ConstraintViolationBuilder {
 		Collections.sort(constraintViolations1, (ConstraintViolation<?> o1, ConstraintViolation<?> o2) -> o1.toString().compareTo(o2.toString()));
 
 		StringBuilder constraintViolationBuilder = new StringBuilder();
-		
-		constraintViolations1.forEach((constraintViolation) -> {
+
+		constraintViolations1.forEach(constraintViolation -> {
 			if (constraintViolationBuilder.length() > 0) {
 				constraintViolationBuilder.append(VIOLATION_SEPARATOR);
 			}
