@@ -24,11 +24,9 @@ import com.mysema.query.QueryModifiers;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.EntityPath;
 import com.mysema.query.types.Path;
-import com.mysema.query.types.path.BeanPath;
 import com.mysema.query.types.path.CollectionPath;
 import com.mysema.query.types.path.EntityPathBase;
 import com.mysema.query.types.path.ListPath;
-import com.mysema.query.types.path.StringPath;
 
 /**
  * Abstract query implementation using QueryDSL project.
@@ -63,7 +61,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 
 	/** By default caching is enabled. */
 	private boolean cacheable = true;
-	
+
 	/**
 	 * Default constructor accepting entity manager and entity path class.
 	 * 
@@ -86,7 +84,8 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	}
 
 	/**
-	 * Checks if there is already existing join. Useful if there is no need for duplicate joins.
+	 * Checks if there is already existing join. Useful if there is no need for
+	 * duplicate joins.
 	 * 
 	 * @param target
 	 * @param alias
@@ -101,7 +100,8 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	}
 
 	/**
-	 * Checks if there is already existing join. Useful if there is no need for duplicate joins.
+	 * Checks if there is already existing join. Useful if there is no need for
+	 * duplicate joins.
 	 * 
 	 * @param target
 	 * @param alias
@@ -116,45 +116,14 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	}
 
 	/**
-	 * Checks if there is already existing join. Useful if there is no need for duplicate joins.
+	 * Checks if there is already existing join. Useful if there is no need for
+	 * duplicate joins.
 	 * 
 	 * @param target
 	 * @param alias
 	 * @return
 	 */
 	protected <P, Z extends EntityPathBase<P>> Z validateJoin(CollectionPath<P, Z> target, Z alias) {
-		if (!joins.contains(alias)) {
-			getQuery().join(target, alias);
-			joins.add(alias);
-		}
-		return alias;
-	}
-
-	/**
-	 * Checks if there is already existing join. Useful if there is no need for duplicate joins.
-	 * 
-	 * @param target
-	 * @param alias
-	 * @return
-	 */
-	protected StringPath validateJoin(ListPath<String, StringPath> target, StringPath alias) {
-		if (!joins.contains(alias)) {
-			getQuery().join(target, alias);
-			joins.add(alias);
-		}
-		return alias;
-	}
-
-	/**
-	 * Checks if there is already existing join. Useful if there is no need for duplicate joins.
-	 * 
-	 * @param target
-	 *            target join
-	 * @param alias
-	 *            alias to use in join
-	 * @return the same alias as provided in parameter list
-	 */
-	protected <P, Z extends BeanPath<P>> Z validate(ListPath<P, Z> target, Z alias) {
 		if (!joins.contains(alias)) {
 			getQuery().join(target, alias);
 			joins.add(alias);
@@ -214,7 +183,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 		this.pageSize = pageSize;
 		return (Q) this;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
