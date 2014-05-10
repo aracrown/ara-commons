@@ -103,8 +103,8 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	 *             constraint validation is thrown if was detected by exception
 	 *             handler. Otherwise original exception is re-thrown.
 	 */
-	public T save(T entity) throws EntitySaveException, EntityValidationException {
-		T mergedEntity;
+	public <E> E save(E entity) throws EntitySaveException, EntityValidationException {
+		E mergedEntity;
 		try {
 			mergedEntity = getEntityManager().merge(entity);
 			getEntityManager().flush();

@@ -22,7 +22,7 @@ package org.aracrown.commons.persistence.exception;
  * 
  * @since 1.0.0
  */
-public class EntitySaveException extends Exception {
+public class EntitySaveException extends RuntimeException {
 
 	/**
 	 * 

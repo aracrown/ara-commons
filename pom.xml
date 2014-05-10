@@ -11,7 +11,7 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<querydsl.version>3.3.2</querydsl.version>
+		<querydsl.version>3.3.3</querydsl.version>
 		<guava.version>17.0</guava.version>		
 		<ara-dependencies-test.version>1.0.0-SNAPSHOT</ara-dependencies-test.version>
 		<ara-dependencies-provided.version>1.0.0-SNAPSHOT</ara-dependencies-provided.version>
@@ -91,7 +91,7 @@
 		
 		<!-- Provided utilities -->
 		<dependency>
-			<groupId>org.aracrown.commons</groupId>
+			<groupId>org.aracrown</groupId>
 			<artifactId>ara-dependencies-provided</artifactId>
 			<version>${ara-dependencies-provided.version}</version>
 			<type>pom</type>
@@ -100,7 +100,7 @@
 		
 		<!-- Test utilities -->
 		<dependency>
-			<groupId>org.aracrown.commons</groupId>
+			<groupId>org.aracrown</groupId>
 			<artifactId>ara-dependencies-test</artifactId>
 			<version>${ara-dependencies-test.version}</version>
 			<type>pom</type>
