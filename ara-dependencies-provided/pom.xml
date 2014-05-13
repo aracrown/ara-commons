@@ -17,6 +17,19 @@
 		<javaee.version>7.0</javaee.version>
 	</properties>
 
+	<distributionManagement>
+                <repository>
+                        <id>deployment</id>
+                        <name>Internal Releases</name>
+                        <url>http://www.aracrown.org/nexus/content/repositories/releases/</url>
+                </repository>
+                <snapshotRepository>
+                        <id>deployment</id>
+                        <name>Internal snapshots</name>
+                        <url>http://www.aracrown.org/nexus/content/repositories/snapshots/</url>
+                </snapshotRepository>
+        </distributionManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>javax</groupId>
