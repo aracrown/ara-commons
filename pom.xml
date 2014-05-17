@@ -29,6 +29,7 @@
 		<module>ara-dependencies-provided</module>
 		<module>ara-dependencies-test</module>
 		<module>ara-commons</module>
+		<module>ara-commons-liquibase</module>
 	</modules>
 	
 	<distributionManagement>
@@ -46,6 +47,13 @@
 	
 	<dependencyManagement>
 		<dependencies>
+			<!-- Migration utilities -->
+                        <dependency>
+                                <groupId>org.liquibase</groupId>
+                                <artifactId>liquibase-core</artifactId>
+                                <version>3.1.1</version>
+                        </dependency>
+
 			<!-- Owner => to handle property files -->
 			<dependency>
 				<groupId>org.aeonbits.owner</groupId>
