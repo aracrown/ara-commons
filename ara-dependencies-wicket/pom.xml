@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.aracrown</groupId>
+	<artifactId>ara-dependencies-wicket</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>ara-dependencies-wicket</name>
+	<description>Wicket dependency package.</description>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<wicket.version>6.15.0</wicket.version>
+	</properties>
+	
+	<dependencies>
+		<!-- Apache Wicket -->
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-core</artifactId>
+			<version>${wicket.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-cdi</artifactId>
+			<version>${wicket.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>
+						jboss-interceptors-api_1.1_spec
+					</artifactId>
+					<groupId>org.jboss.spec.javax.interceptor</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>cdi-api</artifactId>
+					<groupId>javax.enterprise</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-extensions</artifactId>
+			<version>${wicket.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-datetime</artifactId>
+			<version>${wicket.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-objectautocomplete</artifactId>
+			<version>${wicket.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaynberg.wicket.select2</groupId>
+			<artifactId>wicket-select2</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.agilecoders.wicket</groupId>
+			<artifactId>bootstrap-extensions</artifactId>
+			<version>0.7.6</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>antlr</artifactId>
+					<groupId>antlr</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>antlr</artifactId>
+					<groupId>org.antlr</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+</project>

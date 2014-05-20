@@ -28,6 +28,7 @@
 	<modules>
 		<module>ara-dependencies-provided</module>
 		<module>ara-dependencies-test</module>
+		<module>ara-dependencies-wicket</module>
 		<module>ara-commons</module>
 		<module>ara-commons-liquibase</module>
 	</modules>
