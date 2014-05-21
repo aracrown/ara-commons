@@ -1,4 +1,4 @@
-package org.aracrown.commons.util;
+package org.aracrown.commons.date;
 
 /**
  * Customized time zone.
