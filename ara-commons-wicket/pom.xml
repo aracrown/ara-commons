@@ -20,5 +20,10 @@
 			<version>1.0.0-SNAPSHOT</version>
 			<type>pom</type>
 		</dependency>
+		<dependency>
+			<groupId>org.aracrown.commons</groupId>
+			<artifactId>ara-commons</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>
