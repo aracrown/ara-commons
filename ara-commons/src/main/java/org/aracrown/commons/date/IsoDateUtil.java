@@ -16,17 +16,22 @@
 package org.aracrown.commons.date;
 
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
 /**
  * Small utility class to format date time into ISO format.
@@ -85,6 +90,27 @@ public final class IsoDateUtil {
 	}
 
 	/**
+	 * Formats provided date using provided {@link Locale} and {@link ZoneId}.
+	 * 
+	 * @param date
+	 *            provided date to format
+	 * @param locale
+	 *            locale to be used while formatting the date
+	 * @param zoneId
+	 *            provided time zone id
+	 * @return formatted date with provided locale
+	 */
+	public String format(ZonedDateTime date, Locale locale, ZoneId zoneId) {
+		if (date == null) {
+			return null;
+		}
+
+		DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder().appendLocalized(FormatStyle.MEDIUM, FormatStyle.MEDIUM);
+
+		return builder.toFormatter(locale).format(date.withZoneSameInstant(zoneId));
+	}
+
+	/**
 	 * Formats provided date into ISO date time format with UTC time zone.
 	 * 
 	 * @param date
@@ -135,5 +161,27 @@ public final class IsoDateUtil {
 	private ZonedDateTime parseDefault(String dateString) {
 		DateTimeFormatter df = new DateTimeFormatterBuilder().append(DateTimeFormatter.ISO_OFFSET_DATE_TIME).toFormatter();
 		return ZonedDateTime.parse(dateString, df);
+	}
+
+	public String formatNoTime(ZonedDateTime date) {
+		if (date == null) {
+			return null;
+		}
+
+		DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+
+		return formatter.format(date);
+	}
+
+	public ZonedDateTime parseNoTime(String value) {
+		if (Strings.isNullOrEmpty(value)) {
+			return null;
+		}
+
+		DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+
+		LocalDate localDate = LocalDate.parse(value, formatter);
+		
+		return ZonedDateTime.of(localDate, LocalTime.now(), ZoneOffset.UTC);
 	}
 }
