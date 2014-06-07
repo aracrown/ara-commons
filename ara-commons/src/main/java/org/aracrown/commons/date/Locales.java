@@ -17,9 +17,9 @@ import com.google.common.base.Strings;
  */
 public class Locales {
 	private static final List<Locale> LOCALE_LIST = new ArrayList<Locale>();
-	
+
 	static {
-		Locale locales[] = SimpleDateFormat.getAvailableLocales();
+		Locale[] locales = SimpleDateFormat.getAvailableLocales();
 		for (int i = 0; i < locales.length; i++) {
 			if (!Strings.isNullOrEmpty(locales[i].getCountry())) {
 				LOCALE_LIST.add(locales[i]);
@@ -35,7 +35,10 @@ public class Locales {
 
 		Collections.sort(LOCALE_LIST, comparator);
 	}
-	
+
+	private Locales() {
+	}
+
 	public static List<Locale> getAvailableLocales() {
 		return new ArrayList<>(LOCALE_LIST);
 	}

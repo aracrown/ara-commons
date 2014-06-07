@@ -62,7 +62,7 @@
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>
 			<artifactId>wicket-bootstrap-extensions</artifactId>
-			<version>0.9.2</version>
+			<version>0.9.3</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>antlr</artifactId>

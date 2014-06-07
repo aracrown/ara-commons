@@ -27,11 +27,6 @@ import java.util.Locale;
  * @since 1.0.0 
  */
 public interface SecurityService extends Serializable {
-	/** Priority constant for api key security implementation. */
-	int PRIORITY_API_KEY = 10;
-	
-	/** Priority constant for guardian security implementation. */
-	int PRIORITY_BASIC = 20;
 	
 	/**
 	 * Authenticate the user by it's username and password.
