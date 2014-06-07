@@ -31,6 +31,7 @@
 		<module>ara-dependencies-wicket</module>
 		<module>ara-commons</module>
 		<module>ara-commons-liquibase</module>
+		<module>ara-commons-wicket</module>
 	</modules>
 	
 	<distributionManagement>
