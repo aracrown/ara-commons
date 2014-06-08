@@ -14,6 +14,7 @@ import org.apache.wicket.model.IModel;
 public interface DataProvider<T> extends IDataProvider<T> {
 	@Override
 	public default void detach() {
+		// Default detach method left empty.
 	}
 
 	@Override
