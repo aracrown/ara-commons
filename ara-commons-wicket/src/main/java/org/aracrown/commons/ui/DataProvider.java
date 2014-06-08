@@ -31,7 +31,7 @@ public abstract class DataProvider<T> implements IDataProvider<T> {
 	}
 
 	@Override
-	public Iterator<? extends T> iterator(long first, long count) {
+	public Iterator<T> iterator(long first, long count) {
 		if (first == 0) {
 			return loaded.iterator();
 		}
