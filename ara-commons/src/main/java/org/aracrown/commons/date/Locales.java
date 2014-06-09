@@ -36,10 +36,19 @@ public class Locales {
 		Collections.sort(LOCALE_LIST, comparator);
 	}
 
+	private static Locales INSTANCE;
+
 	private Locales() {
 	}
 
-	public static List<Locale> getAvailableLocales() {
+	public static Locales get() {
+		if (INSTANCE == null) {
+			INSTANCE = new Locales();
+		}
+		return INSTANCE;
+	}
+
+	public List<Locale> getAvailableLocales() {
 		return new ArrayList<>(LOCALE_LIST);
 	}
 }

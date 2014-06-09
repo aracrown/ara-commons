@@ -18,6 +18,7 @@ package org.aracrown.commons.date;
 import java.text.ParseException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,5 +40,11 @@ public class IsoDateUtilTest {
 		
 		
 		Assert.assertEquals("1990-01-01T21:00:00+11:00", IsoDateUtil.get().format(date, ZoneId.of("Australia/Sydney")));
+		
+		Assert.assertEquals("Jan 1, 1990 9:00:00 PM", IsoDateUtil.get().format(date, Locale.ENGLISH, ZoneId.of("Australia/Sydney")));
+		
+		Assert.assertEquals("1990-01-01Z", IsoDateUtil.get().formatNoTime(date));
+		
+		Assert.assertEquals("2012-02-15Z", IsoDateUtil.get().formatNoTime(IsoDateUtil.get().parseNoTime("2012-02-15")));
 	}
 }
