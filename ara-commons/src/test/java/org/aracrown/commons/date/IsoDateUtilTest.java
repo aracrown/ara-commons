@@ -46,5 +46,9 @@ public class IsoDateUtilTest {
 		Assert.assertEquals("1990-01-01Z", IsoDateUtil.get().formatNoTime(date));
 		
 		Assert.assertEquals("2012-02-15Z", IsoDateUtil.get().formatNoTime(IsoDateUtil.get().parseNoTime("2012-02-15")));
+		
+		Assert.assertNull(IsoDateUtil.get().format(null, Locale.ENGLISH, ZoneId.of("Australia/Sydney")));
+		Assert.assertNull(IsoDateUtil.get().formatNoTime(null));
+		Assert.assertNull(IsoDateUtil.get().parseNoTime(null));
 	}
 }
