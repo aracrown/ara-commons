@@ -10,6 +10,11 @@ public class DataProviderTest {
 	public void testDefault() throws Exception {
 		DataProvider<TestObj> provider = new DataProvider<TestObj>() {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public long size() {
 				return 0;
@@ -17,7 +22,7 @@ public class DataProviderTest {
 
 			@Override
 			public Iterator<TestObj> iterator(long first, long count) {
-				return new ArrayList().iterator();
+				return new ArrayList<TestObj>().iterator();
 			}
 		};
 		provider.detach();

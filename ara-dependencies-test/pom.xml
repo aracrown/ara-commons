@@ -16,17 +16,17 @@
 	</properties>
 
 	<distributionManagement>
-                <repository>
-                        <id>deployment</id>
-                        <name>Internal Releases</name>
-                        <url>http://www.aracrown.org/nexus/content/repositories/releases/</url>
-                </repository>
-                <snapshotRepository>
-                        <id>deployment</id>
-                        <name>Internal snapshots</name>
-                        <url>http://www.aracrown.org/nexus/content/repositories/snapshots/</url>
-                </snapshotRepository>
-        </distributionManagement>
+		<repository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://www.aracrown.org/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>deployment</id>
+			<name>Internal snapshots</name>
+			<url>http://www.aracrown.org/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<dependencies>
 		<!-- Test utilities -->
@@ -73,11 +73,17 @@
 			<artifactId>cdi-api</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jglue.cdi-unit</groupId>
+			<artifactId>cdi-unit</artifactId>
+			<version>3.0.1</version>
 		</dependency>
 	</dependencies>
 
