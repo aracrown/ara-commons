@@ -98,6 +98,22 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 		}
 		return alias;
 	}
+	
+	/**
+	 * Checks if there is already existing join. Useful if there is no need for
+	 * duplicate joins.
+	 * 
+	 * @param target
+	 * @param alias
+	 * @return
+	 */
+	protected <P, Z extends Path<P>> Z validateLeftJoin(EntityPath<P> target, Z alias) {
+		if (!joins.contains(alias)) {
+			jpaQuery.leftJoin(target, alias);
+			joins.add(alias);
+		}
+		return alias;
+	}
 
 	/**
 	 * Checks if there is already existing join. Useful if there is no need for
