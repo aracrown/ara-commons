@@ -20,6 +20,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.aracrown.commons.persistence.joins.InnerJoin;
+import org.aracrown.commons.persistence.joins.Join;
+import org.aracrown.commons.persistence.joins.LeftJoin;
+
 import com.mysema.query.QueryModifiers;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.EntityPath;
@@ -92,13 +96,17 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * @return
 	 */
 	protected <P, Z extends Path<P>> Z validateJoin(EntityPath<P> target, Z alias) {
-		if (!joins.contains(alias)) {
-			jpaQuery.join(target, alias);
-			joins.add(alias);
-		}
-		return alias;
+		return validateInternalJoin(new InnerJoin<>(target, alias));
 	}
 	
+	private <P, Z extends Path<P>> Z validateInternalJoin(Join<P, Z> join) {
+		if (!joins.contains(join.getAlias())) {
+			join.addJoin(jpaQuery);
+			joins.add(join.getAlias());
+		}
+		return join.getAlias();
+	}
+
 	/**
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
@@ -108,11 +116,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * @return
 	 */
 	protected <P, Z extends Path<P>> Z validateLeftJoin(EntityPath<P> target, Z alias) {
-		if (!joins.contains(alias)) {
-			jpaQuery.leftJoin(target, alias);
-			joins.add(alias);
-		}
-		return alias;
+		return validateInternalJoin(new LeftJoin<>(target, alias));
 	}
 
 	/**

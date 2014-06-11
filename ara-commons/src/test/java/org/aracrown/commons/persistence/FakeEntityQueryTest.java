@@ -28,6 +28,8 @@ public class FakeEntityQueryTest extends AbstractDaoTest {
 		query.testJoin();
 		query.testListJoin();
 		query.testListJoin();
+		query.testLeftJoin();
+		query.testLeftJoin();
 		query.testCollectionJoin();
 		query.testCollectionJoin();
 	}

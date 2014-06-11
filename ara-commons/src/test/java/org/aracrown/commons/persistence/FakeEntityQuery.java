@@ -26,6 +26,11 @@ public class FakeEntityQuery extends AbstractQuery<QFakeEntity, FakeEntity> {
 		QFakeEntity q = new QFakeEntity("test3");
 		q = validateJoin(new ListPath(FakeEntity.class, QFakeEntity.class, "fakeEntity"), q);
 	}
+	
+	public void testLeftJoin() {
+		QFakeEntity q = new QFakeEntity("test31");
+		q = validateLeftJoin(QFakeEntity.fakeEntity, q);
+	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void testCollectionJoin() {
