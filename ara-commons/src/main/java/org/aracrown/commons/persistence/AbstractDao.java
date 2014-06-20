@@ -128,8 +128,8 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	 * @param entity
 	 *            entity instance to remove
 	 */
-	public void delete(T entity) {
-		T entityToDelete = getEntityManager().merge(entity);
+	public <E> void delete(E entity) {
+		E entityToDelete = getEntityManager().merge(entity);
 		getEntityManager().remove(entityToDelete);
 	}
 
@@ -158,7 +158,11 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 			throw newException;
 		}
 	}
-
+	
+	public <E> E merge(E entity) {
+		return getEntityManager().merge(entity);
+	}
+	
 	/**
 	 * Returns the implementation of query.
 	 * 
