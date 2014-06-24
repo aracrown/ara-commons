@@ -14,7 +14,7 @@ public class RandomStringGenerator {
 		return DigestUtils.sha256Hex(new BigInteger(130, RANDOM).toString(32));
 	}
 
-	public String generatePassword(int stringLength) {
+	public String generate(int stringLength) {
 		StringBuilder randomString = new StringBuilder();
 		for (int i = 0; i < stringLength; i++) {
 			int index = RANDOM.nextInt(LETTERS.length());

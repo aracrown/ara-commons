@@ -31,6 +31,7 @@ import com.mysema.query.types.Path;
 import com.mysema.query.types.path.CollectionPath;
 import com.mysema.query.types.path.EntityPathBase;
 import com.mysema.query.types.path.ListPath;
+import com.mysema.query.types.path.SetPath;
 
 /**
  * Abstract query implementation using QueryDSL project.
@@ -53,12 +54,6 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 
 	/** The entity path. */
 	private final T path;
-
-	/** Position to start. */
-	private Long first = 0L;
-
-	/** How many items to retrieve. */
-	private Long pageSize = Constants.DEFAULT_PAGE_SIZE;
 
 	/** Available joins for this query. */
 	private final List<Path<?>> joins = new ArrayList<>();
@@ -98,7 +93,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	protected <P, Z extends Path<P>> Z validateJoin(EntityPath<P> target, Z alias) {
 		return validateInternalJoin(new InnerJoin<>(target, alias));
 	}
-	
+
 	private <P, Z extends Path<P>> Z validateInternalJoin(Join<P, Z> join) {
 		if (!joins.contains(join.getAlias())) {
 			join.addJoin(jpaQuery);
@@ -152,6 +147,22 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	}
 
 	/**
+	 * Checks if there is already existing join. Useful if there is no need for
+	 * duplicate joins.
+	 * 
+	 * @param target
+	 * @param alias
+	 * @return
+	 */
+	protected <P, Z extends EntityPathBase<P>> Z validateJoin(SetPath<P, Z> target, Z alias) {
+		if (!joins.contains(alias)) {
+			getQuery().join(target, alias);
+			joins.add(alias);
+		}
+		return alias;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -164,7 +175,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 */
 	@Override
 	public List<K> list() {
-		return jpaQuery.restrict(new QueryModifiers(pageSize, first)).setHint(ORG_HIBERNATE_CACHEABLE, cacheable).list(path);
+		return jpaQuery.list(path);
 	}
 
 	/**
@@ -199,8 +210,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	@SuppressWarnings("unchecked")
 	@Override
 	public <Q extends Query<K>> Q page(Long first, Long pageSize) {
-		this.first = first;
-		this.pageSize = pageSize;
+		jpaQuery.restrict(new QueryModifiers(pageSize, first)).setHint(ORG_HIBERNATE_CACHEABLE, cacheable);
 		return (Q) this;
 	}
 
