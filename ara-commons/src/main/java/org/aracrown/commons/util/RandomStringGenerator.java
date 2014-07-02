@@ -3,7 +3,7 @@ package org.aracrown.commons.util;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
 
 public class RandomStringGenerator {
 	private static final SecureRandom RANDOM = new SecureRandom();
@@ -11,7 +11,7 @@ public class RandomStringGenerator {
 	private static final String LETTERS = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789+@-_#$!:;|&%()*";
 
 	public String generateHex() {
-		return DigestUtils.sha256Hex(new BigInteger(130, RANDOM).toString(32));
+		return new String(new SimpleHash("SHA-256", new BigInteger(130, RANDOM).toString(32)).getBytes());
 	}
 
 	public String generate(int stringLength) {
