@@ -11,7 +11,7 @@ public class RandomStringGenerator {
 	private static final String LETTERS = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789+@-_#$!:;|&%()*";
 
 	public String generateHex() {
-		return new String(new SimpleHash("SHA-256", new BigInteger(130, RANDOM).toString(32)).getBytes());
+		return new SimpleHash("SHA-256", new BigInteger(130, RANDOM).toString(32)).toHex();
 	}
 
 	public String generate(int stringLength) {
