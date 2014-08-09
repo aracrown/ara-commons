@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.aracrown</groupId>
 	<artifactId>commons-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>ara | commons</name>
 	<description>Java EE Server side component for managing sport types, leagues, teams and players.</description>
 	
@@ -13,8 +12,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<querydsl.version>3.3.3</querydsl.version>
 		<guava.version>17.0</guava.version>		
-		<ara-dependencies-test.version>1.0.0-SNAPSHOT</ara-dependencies-test.version>
-		<ara-dependencies-provided.version>1.0.0-SNAPSHOT</ara-dependencies-provided.version>
+		<ara-dependencies-test.version>1.0.1-SNAPSHOT</ara-dependencies-test.version>
+		<ara-dependencies-provided.version>1.0.1-SNAPSHOT</ara-dependencies-provided.version>
 	
 	</properties>
 	
