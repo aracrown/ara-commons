@@ -21,6 +21,7 @@
                                 <version>1.0-m3</version>
                                 <configuration>
                                         <flowInitContext>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
                                                 <developBranchName>development</developBranchName>
                                                 <featureBranchPrefix>feature-</featureBranchPrefix>
                                                 <releaseBranchPrefix>release-</releaseBranchPrefix>
