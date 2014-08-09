@@ -134,7 +134,7 @@
 				<artifactId>jgitflow-maven-plugin</artifactId>
 				<version>1.0-m3</version>
 				<configuration>
-            				<flowInitContext>
+            				<flowInitContext>		
          					<developBranchName>development</developBranchName>
          					<featureBranchPrefix>feature-</featureBranchPrefix>
          					<releaseBranchPrefix>release-</releaseBranchPrefix>
