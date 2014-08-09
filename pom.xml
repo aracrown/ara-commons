@@ -15,6 +15,7 @@
 		<guava.version>17.0</guava.version>		
 		<ara-dependencies-test.version>1.0.0-SNAPSHOT</ara-dependencies-test.version>
 		<ara-dependencies-provided.version>1.0.0-SNAPSHOT</ara-dependencies-provided.version>
+	
 	</properties>
 	
 	<licenses>
@@ -129,6 +130,19 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>1.0-m3</version>
+				<configuration>
+            				<flowInitContext>
+         					<developBranchName>development</developBranchName>
+         					<featureBranchPrefix>feature-</featureBranchPrefix>
+         					<releaseBranchPrefix>release-</releaseBranchPrefix>
+         					<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+       					</flowInitContext>
+				</configuration>
+        		</plugin>
 		</plugins>
 	</build>
 

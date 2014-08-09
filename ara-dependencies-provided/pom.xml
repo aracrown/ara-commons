@@ -17,6 +17,24 @@
 		<javaee.version>7.0</javaee.version>
 	</properties>
 
+	<build>
+		<plugins>
+			<plugin>
+                                <groupId>external.atlassian.jgitflow</groupId>
+                                <artifactId>jgitflow-maven-plugin</artifactId>
+                                <version>1.0-m3</version>
+                                <configuration>
+                                        <flowInitContext>
+                                                <developBranchName>development</developBranchName>
+                                                <featureBranchPrefix>feature-</featureBranchPrefix>
+                                                <releaseBranchPrefix>release-</releaseBranchPrefix>
+                                                <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+                                        </flowInitContext>
+                                </configuration>
+                        </plugin>
+		</plugins>
+	</build>
+
 	<distributionManagement>
                 <repository>
                         <id>deployment</id>
