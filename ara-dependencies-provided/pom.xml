@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.aracrown</groupId>
 	<artifactId>ara-dependencies-provided</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 	<packaging>pom</packaging>
 	<name>ara-dependencies-provided</name>
 	<description>Provided dependency package.</description>
