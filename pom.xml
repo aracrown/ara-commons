@@ -4,7 +4,7 @@
 	<groupId>org.aracrown</groupId>
 	<artifactId>commons-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<name>ara | commons</name>
 	<description>Java EE Server side component for managing sport types, leagues, teams and players.</description>
 	
@@ -12,8 +12,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<querydsl.version>3.3.3</querydsl.version>
 		<guava.version>17.0</guava.version>		
-		<ara-dependencies-test.version>1.0.3</ara-dependencies-test.version>
-		<ara-dependencies-provided.version>1.0.3</ara-dependencies-provided.version>
+		<ara-dependencies-test.version>1.0.4</ara-dependencies-test.version>
+		<ara-dependencies-provided.version>1.0.4</ara-dependencies-provided.version>
 	
 	</properties>
 	
