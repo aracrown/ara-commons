@@ -16,13 +16,14 @@
 package org.aracrown.commons.persistence.exception;
 
 /**
- * The class <i>EntityNotFoundException</i> is a checked exception. It is used to notify the caller when entity was not found in database.
+ * The class <i>EntityNotFoundException</i> is a checked exception. It is used
+ * to notify the caller when entity was not found in database.
  * 
  * @author vicento.ramos
  * 
  * @since 1.0.0
  */
-public class EntityNotFoundException extends Exception {
+public class EntityNotFoundException extends RuntimeException {
 
 	/**
 	 * 
@@ -33,7 +34,8 @@ public class EntityNotFoundException extends Exception {
 	 * Constructs a new exception with the specified detail message.
 	 * 
 	 * @param message
-	 *            the detail message (which is saved for later retrieval by the Throwable.getMessage() method).
+	 *            the detail message (which is saved for later retrieval by the
+	 *            Throwable.getMessage() method).
 	 */
 	public EntityNotFoundException(String message) {
 		super(message);
@@ -43,10 +45,12 @@ public class EntityNotFoundException extends Exception {
 	 * Constructs a new exception with the specified detail message and cause.
 	 * 
 	 * @param message
-	 *            the detail message (which is saved for later retrieval by the Throwable.getMessage() method).
+	 *            the detail message (which is saved for later retrieval by the
+	 *            Throwable.getMessage() method).
 	 * @param cause
-	 *            the cause (which is saved for later retrieval by the Throwable.getCause() method). (A null value is permitted, and indicates that
-	 *            the cause is nonexistent or unknown.)
+	 *            the cause (which is saved for later retrieval by the
+	 *            Throwable.getCause() method). (A null value is permitted, and
+	 *            indicates that the cause is nonexistent or unknown.)
 	 */
 	public EntityNotFoundException(String message, Throwable cause) {
 		super(message, cause);

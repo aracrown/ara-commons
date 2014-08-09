@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.aracrown</groupId>
 	<artifactId>ara-dependencies-wicket</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>ara-dependencies-wicket</name>
 	<description>Wicket dependency package.</description>
 	
@@ -13,6 +12,37 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<wicket.version>6.15.0</wicket.version>
 	</properties>
+
+	<build>
+                <plugins>
+                        <plugin>
+                                <groupId>external.atlassian.jgitflow</groupId>
+                                <artifactId>jgitflow-maven-plugin</artifactId>
+                                <version>1.0-m3</version>
+                                <configuration>
+                                        <flowInitContext>
+                                                <developBranchName>development</developBranchName>
+                                                <featureBranchPrefix>feature-</featureBranchPrefix>
+                                                <releaseBranchPrefix>release-</releaseBranchPrefix>
+                                                <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+                                        </flowInitContext>
+                                </configuration>
+                        </plugin>
+                </plugins>
+        </build>
+
+	<distributionManagement>
+                <repository>
+                        <id>deployment</id>
+                        <name>Internal Releases</name>
+                        <url>http://www.aracrown.org/nexus/content/repositories/releases/</url>
+                </repository>
+                <snapshotRepository>
+                        <id>deployment</id>
+                        <name>Internal snapshots</name>
+                        <url>http://www.aracrown.org/nexus/content/repositories/snapshots/</url>
+                </snapshotRepository>
+        </distributionManagement>
 	
 	<dependencies>
 		<!-- Apache Wicket -->
