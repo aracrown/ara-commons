@@ -36,7 +36,7 @@ public interface SecurityService extends Serializable {
 	 * @return {@code true} if this Subject proved their identity during their current session by providing valid credentials matching those known to
 	 *         the system, {@code false} otherwise.
 	 */
-	boolean authenticate(/** TODO authentication token is missing here. */);
+	boolean authenticate(UsernamePasswordToken token);
 
 	/**
 	 * Returns {@code true} if this Subject has at least one specified role, {@code false} otherwise.
