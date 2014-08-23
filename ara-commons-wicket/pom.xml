@@ -17,12 +17,18 @@
 			<groupId>org.aracrown</groupId>
 			<artifactId>ara-dependencies-wicket</artifactId>
 			<version>1.0.5-SNAPSHOT</version>
-			<type>pom</type>
+			<type>pom</type> 
 		</dependency>
 		<dependency>
 			<groupId>org.aracrown.commons</groupId>
 			<artifactId>ara-commons</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		
+		<!-- Apache shiro -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
 		</dependency>
 	</dependencies>
 </project>

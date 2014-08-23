@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:wicket>
+<body>
+	<wicket:panel>
+		<div class="form-box" id="login-box">
+			<div class="header">Sign In</div>
+			<form action="../../index.html" method="post" wicket:id="signIn">
+				<div class="body bg-gray">
+					<div class="form-group">
+						<div wicket:id="feedback"></div>
+					</div>
+					<!-- /form-group -->
+					<div class="form-group">
+						<input type="text" name="userid" class="form-control"
+							placeholder="User ID" wicket:id="username">
+					</div>
+					<div class="form-group">
+						<input type="password" name="password" class="form-control"
+							placeholder="Password" wicket:id="password">
+					</div>
+				</div>
+				<div class="footer">
+					<button type="submit" class="btn bg-olive btn-block">Sign
+						me in</button>
+
+					<p>
+						<a href="#">I forgot my password</a>
+					</p>
+				</div>
+			</form>
+		</div>
+
+	</wicket:panel>
+</body>
+</html>
