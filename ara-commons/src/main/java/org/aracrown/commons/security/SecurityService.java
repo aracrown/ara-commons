@@ -18,53 +18,64 @@ package org.aracrown.commons.security;
 import java.io.Serializable;
 import java.time.ZoneId;
 import java.util.Locale;
+import java.util.Map;
 
 /**
- * Security interface, providing authentication and authorization method for the current user.
+ * Security interface, providing authentication and authorization method for the
+ * current user.
  * 
  * @author vicento.ramos
  * 
- * @since 1.0.0 
+ * @since 1.0.0
  */
 public interface SecurityService extends Serializable {
-	
+
 	/**
 	 * Authenticate the user by it's username and password.
 	 * 
 	 * @param authenticationToken
-	 *            the username and password combination, submitted for authentication
-	 * @return {@code true} if this Subject proved their identity during their current session by providing valid credentials matching those known to
-	 *         the system, {@code false} otherwise.
+	 *            the username and password combination, submitted for
+	 *            authentication
+	 * @return {@code true} if this Subject proved their identity during their
+	 *         current session by providing valid credentials matching those
+	 *         known to the system, {@code false} otherwise.
 	 */
 	boolean authenticate(UsernamePasswordToken token);
 
 	/**
-	 * Returns {@code true} if this Subject has at least one specified role, {@code false} otherwise.
+	 * Returns {@code true} if this Subject has at least one specified role,
+	 * {@code false} otherwise.
 	 * 
 	 * @param roles
-	 *            the list of application-specific role identifiers (usually a role id or role name).
-	 * @return {@code true} if this Subject has at least one specified role, {@code false} otherwise.
+	 *            the list of application-specific role identifiers (usually a
+	 *            role id or role name).
+	 * @return {@code true} if this Subject has at least one specified role,
+	 *         {@code false} otherwise.
 	 */
 	boolean hasAnyRole(String[] roles);
 
 	/**
-	 * Returns {@code true} if this Subject is permitted to perform at least one action or access a resource summarized by the specified permission
+	 * Returns {@code true} if this Subject is permitted to perform at least one
+	 * action or access a resource summarized by the specified permission
 	 * string.
 	 * 
 	 * @param permissions
-	 *            the String list representation of one or more Permissions that are being checked.
+	 *            the String list representation of one or more Permissions that
+	 *            are being checked.
 	 * @return true if this Subject is permitted, false otherwise.
 	 */
 	boolean hasAnyPermission(String[] permissions);
 
 	/**
-	 * Logs out this Subject and invalidates and/or removes any associated entities.
+	 * Logs out this Subject and invalidates and/or removes any associated
+	 * entities.
 	 */
 	void logout();
 
 	/**
-	 * Returns this Subject's application-wide uniquely identifying principal, or {@code null} if this Subject is anonymous because it doesn't yet
-	 * have any associated account data (for example, if they haven't logged in).
+	 * Returns this Subject's application-wide uniquely identifying principal,
+	 * or {@code null} if this Subject is anonymous because it doesn't yet have
+	 * any associated account data (for example, if they haven't logged in).
 	 * 
 	 * @return this Subject's application-specific unique identity.
 	 */
@@ -76,7 +87,7 @@ public interface SecurityService extends Serializable {
 	 * @return subject's time zone instance
 	 */
 	ZoneId getZoneId();
-	
+
 	/**
 	 * Returns this Subject's customized locale or default one if not found.
 	 * 
@@ -84,13 +95,26 @@ public interface SecurityService extends Serializable {
 	 */
 	Locale getLocale();
 
-
-
 	/**
 	 * Checks if user is logged in.
 	 * 
 	 * @return true if there is current user logged in
 	 */
 	boolean isAuthenticated();
+
+	/**
+	 * Returns full user name. Username is returned if no full name available.
+	 * 
+	 * @return string representation of user first name and last name if
+	 *         available
+	 */
+	String getName();
+
+	/**
+	 * Returns user's properties if any available.
+	 * 
+	 * @return map of user properties
+	 */
+	Map<String, String> getProperties();
 
 }
