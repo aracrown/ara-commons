@@ -50,8 +50,7 @@ public class AnnotationsRoleAuthorizationStrategy implements IAuthorizationStrat
 	public boolean isActionAuthorized(Component component, Action action) {
 		// Get component's class
 		final Class<?> componentClass = component.getClass();
-		boolean t =  isActionAuthorized(componentClass);
-		return t;
+		return  isActionAuthorized(componentClass);
 	}
 
 	private boolean isActionAuthorized(Class<?> componentClass) {
