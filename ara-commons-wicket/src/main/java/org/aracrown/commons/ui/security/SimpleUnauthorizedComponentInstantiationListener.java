@@ -17,8 +17,11 @@ import org.apache.wicket.request.cycle.RequestCycle;
  * 
  * @since 1.0.0
  * 
+ * @param <T>
+ *            Concrete Login page implementation class type
+ * 
  */
-public abstract class SimpleUnauthorizedComponentInstantiationListener implements IUnauthorizedComponentInstantiationListener {
+public abstract class SimpleUnauthorizedComponentInstantiationListener<T extends Page> implements IUnauthorizedComponentInstantiationListener {
 
 	@Override
 	public void onUnauthorizedInstantiation(Component component) {
@@ -42,5 +45,5 @@ public abstract class SimpleUnauthorizedComponentInstantiationListener implement
 	 * 
 	 * @return login page class
 	 */
-	protected abstract Class<? extends Page> getLoginPage();
+	protected abstract Class<T> getLoginPage();
 }
