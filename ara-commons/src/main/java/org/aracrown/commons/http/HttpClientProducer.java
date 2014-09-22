@@ -41,8 +41,7 @@ public final class HttpClientProducer {
 	private static final int MAX_ROUTE = 200;
 
 	/**
-	 * Creates new apache http client using
-	 * {@link PoolingClientConnectionManager}.
+	 * Creates new apache http client.
 	 * 
 	 * @return new instance of http client
 	 * @throws NoSuchAlgorithmException
@@ -81,8 +80,7 @@ public final class HttpClientProducer {
 		RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(TIMEOUT_CON).setConnectTimeout(TIMEOUT_CON)
 				.setSocketTimeout(TIMEOUT_SO).build();
 
-		HttpClient client = HttpClientBuilder.create().setConnectionManager(cm).setDefaultRequestConfig(requestConfig).build();
-		return client;
+		return HttpClientBuilder.create().setConnectionManager(cm).setDefaultRequestConfig(requestConfig).build();
 	}
 
 	private Registry<ConnectionSocketFactory> getSchemeRegistry() throws NoSuchAlgorithmException {

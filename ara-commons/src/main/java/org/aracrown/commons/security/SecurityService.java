@@ -33,7 +33,7 @@ public interface SecurityService extends Serializable {
 	/**
 	 * Authenticate the user by it's username and password.
 	 * 
-	 * @param authenticationToken
+	 * @param token
 	 *            the username and password combination, submitted for
 	 *            authentication
 	 * @return {@code true} if this Subject proved their identity during their
