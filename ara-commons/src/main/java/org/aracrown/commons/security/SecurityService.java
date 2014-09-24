@@ -40,7 +40,7 @@ public interface SecurityService extends Serializable {
 	 *         current session by providing valid credentials matching those
 	 *         known to the system, {@code false} otherwise.
 	 */
-	boolean authenticate(UsernamePasswordToken token);
+	boolean authenticate(UsernamePasswordToken token) throws AuthenticationException;
 
 	/**
 	 * Returns {@code true} if this Subject has at least one specified role,

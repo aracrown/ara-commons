@@ -15,23 +15,17 @@
  */
 package org.aracrown.commons.date;
 
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.Locale;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
 
 /**
  * Small utility class to format date time into ISO format.
@@ -131,10 +125,8 @@ public final class IsoDateUtil {
 	 * @param timeZone
 	 *            the given new time zone.
 	 * @return the formatted time string in new time zone format.
-	 * @throws ParseException
-	 *             if specified string cannot be parsed.
 	 */
-	public String format(String gameDate, ZoneId timeZone) throws ParseException {
+	public String format(String gameDate, ZoneId timeZone) {
 		return format(parse(gameDate), timeZone);
 	}
 

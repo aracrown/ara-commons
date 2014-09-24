@@ -1,7 +1,5 @@
 package org.aracrown.commons.ui.security.panel;
 
-import javax.inject.Inject;
-
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -13,8 +11,8 @@ import org.aracrown.commons.security.AuthenticationException;
 import org.aracrown.commons.security.SecurityService;
 import org.aracrown.commons.security.UsernamePasswordToken;
 import org.aracrown.commons.ui.html.BootstrapFeedbackPanel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
 
 /**
  * Simple login panel.
@@ -33,9 +31,6 @@ public class SignInPanel extends Panel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/** The logger instance. */
-	private static final Logger LOGGER = LoggerFactory.getLogger(SignInPanel.class);
 
 	/** Injected security service instance. */
 	@Inject
@@ -95,22 +90,18 @@ public class SignInPanel extends Panel {
 			add(feedback);
 			feedback.setVisible(false);
 
-			add(new RequiredTextField<String>(USERNAME, new PropertyModel<String>(properties, USERNAME), String.class));
-			add(new PasswordTextField(PASSWORD, new PropertyModel<String>(properties, PASSWORD)));
+			add(new RequiredTextField<>(USERNAME, new PropertyModel<>(properties, USERNAME), String.class));
+			add(new PasswordTextField(PASSWORD, new PropertyModel<>(properties, PASSWORD)));
 		}
 
 		@Override
 		protected void onSubmit() {
 			try {
-				if (!authenticate(getUsername(), getPassword())) {
-					// In case false was returned instead of exception
-					throw new AuthenticationException("LOGIN_ERROR", "Could not login");
-				}
+				authenticate(getUsername(), getPassword());
 				getSession().setLocale(securityService.getLocale());
 				continueToOriginalDestination();
 				setResponsePage(getApplication().getHomePage());
-			} catch (AuthenticationException e) {
-				LOGGER.warn("Authentication error", e);
+			} catch (AuthenticationException e ) {
 				error(getLocalizer().getString(e.getMessageKey(), SignInPanel.this, e.getMessage()));
 				Component feedback = get(FEEDBACK);
 				feedback.setVisible(true);
@@ -126,12 +117,8 @@ public class SignInPanel extends Panel {
 		}
 	}
 
-	protected boolean authenticate(String username, String password) {
-		try {
-			return securityService.authenticate(new UsernamePasswordToken(username, password));
-		} catch (Exception e) {
-			LOGGER.warn("Login error", e);
-			throw new AuthenticationException("LOGIN_ERROR", "Could not login");
-		}
+	protected boolean authenticate(String username, String password) throws AuthenticationException {
+		String remoteAddress = getWebSession().getClientInfo().getProperties().getRemoteAddress();
+		return securityService.authenticate(new UsernamePasswordToken(username, password, remoteAddress));
 	}
 }

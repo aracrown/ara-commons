@@ -1,7 +1,5 @@
 package org.aracrown.commons.ui.security;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.shiro.web.util.WebUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
@@ -9,6 +7,8 @@ import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.authorization.IUnauthorizedComponentInstantiationListener;
 import org.apache.wicket.authorization.UnauthorizedInstantiationException;
 import org.apache.wicket.request.cycle.RequestCycle;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Handling class of unauthorized component instantiations.

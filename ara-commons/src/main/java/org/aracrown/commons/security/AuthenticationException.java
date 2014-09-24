@@ -8,7 +8,7 @@ package org.aracrown.commons.security;
 * @since 1.0.0
 * 
 */
-public class AuthenticationException extends RuntimeException {
+public class AuthenticationException extends Exception {
 	/**
 	 * 
 	 */

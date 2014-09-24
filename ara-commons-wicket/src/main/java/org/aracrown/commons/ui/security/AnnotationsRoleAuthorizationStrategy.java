@@ -1,13 +1,13 @@
 package org.aracrown.commons.ui.security;
 
-import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
-
 import org.apache.wicket.Component;
 import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.apache.wicket.request.component.IRequestableComponent;
 import org.aracrown.commons.security.SecurityService;
+
+import javax.annotation.security.RolesAllowed;
+import javax.inject.Inject;
 
 /**
  * Simple authorization strategy implementation, using {@link RolesAllowed} annotations to resolve role and permission
@@ -57,7 +57,7 @@ public class AnnotationsRoleAuthorizationStrategy implements IAuthorizationStrat
 		final RolesAllowed classAnnotation = componentClass.getAnnotation(RolesAllowed.class);
 		boolean authorized = true;
 		if (classAnnotation != null) {
-			return securityService.hasAnyRole(classAnnotation.value());
+			authorized = securityService.hasAnyRole(classAnnotation.value());
 		}
 		return authorized;
 	}

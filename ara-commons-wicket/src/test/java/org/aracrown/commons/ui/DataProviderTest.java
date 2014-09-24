@@ -1,9 +1,9 @@
 package org.aracrown.commons.ui;
 
+import org.junit.Assert;
+
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import org.junit.Assert;
 
 public class DataProviderTest {
 	@org.junit.Test
