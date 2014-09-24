@@ -4,6 +4,11 @@ import org.apache.shiro.authc.AuthenticationToken;
 
 public class UsernamePasswordToken implements AuthenticationToken{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * The username
 	 */
 	private final String username;
