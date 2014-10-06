@@ -15,15 +15,6 @@
  */
 package org.aracrown.commons.persistence;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
-import org.aracrown.commons.persistence.joins.InnerJoin;
-import org.aracrown.commons.persistence.joins.Join;
-import org.aracrown.commons.persistence.joins.LeftJoin;
-
 import com.mysema.query.QueryModifiers;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.EntityPath;
@@ -32,42 +23,51 @@ import com.mysema.query.types.path.CollectionPath;
 import com.mysema.query.types.path.EntityPathBase;
 import com.mysema.query.types.path.ListPath;
 import com.mysema.query.types.path.SetPath;
+import org.aracrown.commons.persistence.joins.InnerJoin;
+import org.aracrown.commons.persistence.joins.Join;
+import org.aracrown.commons.persistence.joins.LeftJoin;
+
+import javax.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract query implementation using QueryDSL project.
  * <p>
- * 
+ *
+ * @param <T> entity path class
+ * @param <K> entity class
  * @author vicento.ramos
- * 
  * @since 1.0.0
- * 
- * @param <T>
- *            entity path class
- * @param <K>
- *            entity class
  */
 public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Query<K> {
 	private static final String ORG_HIBERNATE_CACHEABLE = "org.hibernate.cacheable";
 
-	/** The JPA query instance. */
+	/**
+	 * The JPA query instance.
+	 */
 	private final JPAQuery jpaQuery;
 
-	/** The entity path. */
+	/**
+	 * The entity path.
+	 */
 	private final T path;
 
-	/** Available joins for this query. */
+	/**
+	 * Available joins for this query.
+	 */
 	private final List<Path<?>> joins = new ArrayList<>();
 
-	/** By default caching is enabled. */
+	/**
+	 * By default caching is enabled.
+	 */
 	private boolean cacheable = true;
 
 	/**
 	 * Default constructor accepting entity manager and entity path class.
-	 * 
-	 * @param entityManager
-	 *            JPA entity manager instance used to perform actual query
-	 * @param path
-	 *            JPA entity queryDSL path
+	 *
+	 * @param entityManager JPA entity manager instance used to perform actual query
+	 * @param path          JPA entity queryDSL path
 	 */
 	public AbstractQuery(EntityManager entityManager, T path) {
 		this.path = path;
@@ -85,10 +85,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	/**
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
-	 * 
-	 * @param target
-	 * @param alias
-	 * @return
+	 *
+	 * @param target entity field as a target
+	 * @param alias  alias name for join created
+	 * @return alias used in join
 	 */
 	protected <P, Z extends Path<P>> Z validateJoin(EntityPath<P> target, Z alias) {
 		return validateInternalJoin(new InnerJoin<>(target, alias));
@@ -105,10 +105,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	/**
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
-	 * 
-	 * @param target
-	 * @param alias
-	 * @return
+	 *
+	 * @param target entity field as a target
+	 * @param alias  alias name for join created
+	 * @return alias used in join
 	 */
 	protected <P, Z extends Path<P>> Z validateLeftJoin(EntityPath<P> target, Z alias) {
 		return validateInternalJoin(new LeftJoin<>(target, alias));
@@ -117,10 +117,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	/**
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
-	 * 
-	 * @param target
-	 * @param alias
-	 * @return
+	 *
+	 * @param target entity field as a target
+	 * @param alias  alias name for join created
+	 * @return alias used in join
 	 */
 	protected <P, Z extends EntityPathBase<P>> Z validateJoin(ListPath<P, Z> target, Z alias) {
 		if (!joins.contains(alias)) {
@@ -133,10 +133,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	/**
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
-	 * 
-	 * @param target
-	 * @param alias
-	 * @return
+	 *
+	 * @param target entity field as a target
+	 * @param alias  alias name for join created
+	 * @return alias used in join
 	 */
 	protected <P, Z extends EntityPathBase<P>> Z validateJoin(CollectionPath<P, Z> target, Z alias) {
 		if (!joins.contains(alias)) {
@@ -149,10 +149,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	/**
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
-	 * 
-	 * @param target
-	 * @param alias
-	 * @return
+	 *
+	 * @param target entity field as a target
+	 * @param alias  alias name for join created
+	 * @return alias used in join
 	 */
 	protected <P, Z extends EntityPathBase<P>> Z validateJoin(SetPath<P, Z> target, Z alias) {
 		if (!joins.contains(alias)) {
@@ -188,7 +188,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 
 	/**
 	 * Returns jpa query instance.
-	 * 
+	 *
 	 * @return the jpaQuery
 	 */
 	public JPAQuery getQuery() {
@@ -197,7 +197,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 
 	/**
 	 * Returns entity root path.
-	 * 
+	 *
 	 * @return the path
 	 */
 	public T getEntityPath() {
