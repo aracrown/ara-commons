@@ -1,5 +1,7 @@
 package org.aracrown.commons.ui.security.panel;
 
+import java.util.Locale;
+
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -98,7 +100,10 @@ public class SignInPanel extends Panel {
 		protected void onSubmit() {
 			try {
 				authenticate(getUsername(), getPassword());
-				getSession().setLocale(securityService.getLocale());
+				Locale userLocale = securityService.getLocale();
+				if (userLocale != null) {
+					getSession().setLocale(userLocale);
+				}
 				continueToOriginalDestination();
 				setResponsePage(getApplication().getHomePage());
 			} catch (AuthenticationException e ) {

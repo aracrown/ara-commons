@@ -1,11 +1,9 @@
 package org.aracrown.commons.util;
 
-import org.apache.shiro.crypto.hash.SimpleHash;
+import org.aracrown.commons.security.Hasher;
 
 public class PasswordEncoder {
-	private static final String ALGORITHM_NAME = "SHA-512";
-
 	public String encodePassword(String password, String passwordSalt, int hashIterations) {
-		return new SimpleHash(ALGORITHM_NAME, password, passwordSalt, hashIterations).toHex();
+		return new Hasher(password, passwordSalt, hashIterations).hashSha512();
 	}
 }

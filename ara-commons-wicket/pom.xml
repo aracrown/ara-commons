@@ -24,11 +24,5 @@
 			<artifactId>ara-commons</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
-		<!-- Apache shiro -->
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-web</artifactId>
-		</dependency>
 	</dependencies>
 </project>

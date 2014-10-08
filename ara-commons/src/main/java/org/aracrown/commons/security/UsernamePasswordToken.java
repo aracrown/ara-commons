@@ -1,8 +1,8 @@
 package org.aracrown.commons.security;
 
-import org.apache.shiro.authc.AuthenticationToken;
+import java.io.Serializable;
 
-public class UsernamePasswordToken implements AuthenticationToken{
+public class UsernamePasswordToken implements Serializable {
 	/**
 	 * 
 	 */
@@ -41,14 +41,6 @@ public class UsernamePasswordToken implements AuthenticationToken{
 	 * @return the password
 	 */
 	public char[] getPassword() {
-		return password;
-	}
-
-	@Override public Object getPrincipal() {
-		return username;
-	}
-
-	@Override public Object getCredentials() {
 		return password;
 	}
 }
