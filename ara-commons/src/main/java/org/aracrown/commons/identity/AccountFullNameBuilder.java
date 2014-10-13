@@ -1,4 +1,4 @@
-package org.aracrown.commons.util;
+package org.aracrown.commons.identity;
 
 import com.google.common.base.Strings;
 
@@ -21,15 +21,23 @@ public class AccountFullNameBuilder {
 	}
 
 	public String build() {
+		return buildInternal(" ");
+	}
+
+	private String buildInternal(String separator) {
 		StringBuilder fullName = new StringBuilder();
 
 		if (!Strings.isNullOrEmpty(firstName)) {
-			fullName.append(firstName);
+			fullName.append(firstName.trim());
 		}
 		if (!Strings.isNullOrEmpty(lastName)) {
-			fullName.append(' ');
-			fullName.append(lastName.toUpperCase());
+			fullName.append(separator);
+			fullName.append(lastName.toUpperCase().trim());
 		}
 		return fullName.toString().trim();
+	}
+	
+	public String buildForUsername() {
+		return buildInternal(".").toLowerCase();
 	}
 }

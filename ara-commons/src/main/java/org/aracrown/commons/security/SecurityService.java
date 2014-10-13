@@ -16,9 +16,8 @@
 package org.aracrown.commons.security;
 
 import java.io.Serializable;
-import java.time.ZoneId;
-import java.util.Locale;
-import java.util.Map;
+
+import org.aracrown.commons.identity.AuthenticatedPrincipal;
 
 /**
  * Security interface, providing authentication and authorization method for the
@@ -36,11 +35,9 @@ public interface SecurityService extends Serializable {
 	 * @param token
 	 *            the username and password combination, submitted for
 	 *            authentication
-	 * @return {@code true} if this Subject proved their identity during their
-	 *         current session by providing valid credentials matching those
-	 *         known to the system, {@code false} otherwise.
+	 * @return authenticated principal instance with proper information populated.
 	 */
-	boolean authenticate(UsernamePasswordToken token) throws AuthenticationException;
+	AuthenticatedPrincipal authenticate(UsernamePasswordToken token) throws AuthenticationException;
 
 	/**
 	 * Returns {@code true} if this Subject has at least one specified role,
@@ -71,50 +68,5 @@ public interface SecurityService extends Serializable {
 	 * entities.
 	 */
 	void logout();
-
-	/**
-	 * Returns this Subject's application-wide uniquely identifying principal,
-	 * or {@code null} if this Subject is anonymous because it doesn't yet have
-	 * any associated account data (for example, if they haven't logged in).
-	 * 
-	 * @return this Subject's application-specific unique identity.
-	 */
-	String getUsername();
-
-	/**
-	 * Returns this Subject's customized time zone or default one if not found.
-	 * 
-	 * @return subject's time zone instance
-	 */
-	ZoneId getZoneId();
-
-	/**
-	 * Returns this Subject's customized locale or default one if not found.
-	 * 
-	 * @return subject's locale instance
-	 */
-	Locale getLocale();
-
-	/**
-	 * Checks if user is logged in.
-	 * 
-	 * @return true if there is current user logged in
-	 */
-	boolean isAuthenticated();
-
-	/**
-	 * Returns full user name. Username is returned if no full name available.
-	 * 
-	 * @return string representation of user first name and last name if
-	 *         available
-	 */
-	String getName();
-
-	/**
-	 * Returns user's properties if any available.
-	 * 
-	 * @return map of user properties
-	 */
-	Map<String, String> getProperties();
 
 }

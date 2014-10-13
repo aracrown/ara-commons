@@ -1,5 +1,7 @@
 package org.aracrown.commons.date;
 
+import java.time.ZoneId;
+
 /**
  * Customized time zone.
  * 
@@ -205,6 +207,10 @@ public enum TimeZoneEnum {
 	 */
 	public boolean isDaylightSavings() {
 		return daylightSavings;
+	}
+
+	public ZoneId getZoneId() {
+		return ZoneId.of(timeZoneId);
 	}
 
 }

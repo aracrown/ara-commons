@@ -2,6 +2,8 @@ package org.aracrown.commons.ui.security.panel;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -9,12 +11,11 @@ import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.util.value.ValueMap;
+import org.aracrown.commons.identity.AuthenticatedPrincipal;
 import org.aracrown.commons.security.AuthenticationException;
 import org.aracrown.commons.security.SecurityService;
 import org.aracrown.commons.security.UsernamePasswordToken;
 import org.aracrown.commons.ui.html.BootstrapFeedbackPanel;
-
-import javax.inject.Inject;
 
 /**
  * Simple login panel.
@@ -99,8 +100,8 @@ public class SignInPanel extends Panel {
 		@Override
 		protected void onSubmit() {
 			try {
-				authenticate(getUsername(), getPassword());
-				Locale userLocale = securityService.getLocale();
+				AuthenticatedPrincipal principal = authenticate(getUsername(), getPassword());
+				Locale userLocale = principal.getLocale();
 				if (userLocale != null) {
 					getSession().setLocale(userLocale);
 				}
@@ -122,7 +123,7 @@ public class SignInPanel extends Panel {
 		}
 	}
 
-	protected boolean authenticate(String username, String password) throws AuthenticationException {
+	protected AuthenticatedPrincipal authenticate(String username, String password) throws AuthenticationException {
 		String remoteAddress = getWebSession().getClientInfo().getProperties().getRemoteAddress();
 		return securityService.authenticate(new UsernamePasswordToken(username, password, remoteAddress));
 	}

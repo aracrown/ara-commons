@@ -15,6 +15,15 @@
  */
 package org.aracrown.commons.persistence;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
+import org.aracrown.commons.persistence.joins.InnerJoin;
+import org.aracrown.commons.persistence.joins.Join;
+import org.aracrown.commons.persistence.joins.LeftJoin;
+
 import com.mysema.query.QueryModifiers;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.EntityPath;
@@ -23,13 +32,6 @@ import com.mysema.query.types.path.CollectionPath;
 import com.mysema.query.types.path.EntityPathBase;
 import com.mysema.query.types.path.ListPath;
 import com.mysema.query.types.path.SetPath;
-import org.aracrown.commons.persistence.joins.InnerJoin;
-import org.aracrown.commons.persistence.joins.Join;
-import org.aracrown.commons.persistence.joins.LeftJoin;
-
-import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Abstract query implementation using QueryDSL project.
@@ -114,6 +116,22 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 		return validateInternalJoin(new LeftJoin<>(target, alias));
 	}
 
+	/**
+	 * Checks if there is already existing join. Useful if there is no need for
+	 * duplicate joins.
+	 *
+	 * @param target entity field as a target
+	 * @param alias  alias name for join created
+	 * @return alias used in join
+	 */
+	protected <P, Z extends EntityPathBase<P>> Z validateLeftJoin(ListPath<P, Z> target, Z alias) {
+		if (!joins.contains(alias)) {
+			getQuery().leftJoin(target, alias);
+			joins.add(alias);
+		}
+		return alias;
+	}
+	
 	/**
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
