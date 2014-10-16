@@ -203,4 +203,8 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 		setSocialIdentifier(socialIdentifier2);
 		return this;
 	}
+
+	public UserPrincipal newPrincipal() {
+		return new UserPrincipal(getName(), getRemoteAddress(), getProvider());
+	}
 }
