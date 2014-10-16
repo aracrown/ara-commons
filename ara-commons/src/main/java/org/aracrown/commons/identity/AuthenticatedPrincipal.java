@@ -2,10 +2,9 @@ package org.aracrown.commons.identity;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
+import javax.ws.rs.FormParam;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,15 +20,20 @@ import com.google.common.base.Strings;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class AuthenticatedPrincipal extends UserPrincipal {
 
+	private static final String ANONYMOUS = "anonymous";
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@FormParam("email")
 	private String email;
 
+	@FormParam("firstName")
 	private String firstName;
 	
+	@FormParam("lastName")
 	private String lastName;
 
 	@XmlJavaTypeAdapter(ZoneIdXmlAdapter.class)
@@ -41,7 +45,37 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	@XmlJavaTypeAdapter(LocaleXmlAdapter.class)
 	private Locale locale;
 
-	private List<String> permissions = new ArrayList<>();
+	@FormParam("socialIdentifier")
+	private String socialIdentifier;
+	
+	public AuthenticatedPrincipal() {
+		setName(ANONYMOUS);
+	}
+
+	public AuthenticatedPrincipal(AuthenticatedPrincipal principal) {
+		setName(principal.getName());
+		setEmail(principal.getEmail());
+		setFirstName(principal.getFirstName());
+		setLastName(principal.getLastName());
+		setZoneId(principal.getZoneId());
+		setLocale(principal.getLocale());
+		setProvider(principal.getProvider());
+		setSocialIdentifier(principal.getSocialIdentifier());
+	}
+
+	/**
+	 * @return the socialIdentifier
+	 */
+	public String getSocialIdentifier() {
+		return socialIdentifier;
+	}
+
+	/**
+	 * @param socialIdentifier the socialIdentifier to set
+	 */
+	public void setSocialIdentifier(String socialIdentifier) {
+		this.socialIdentifier = socialIdentifier;
+	}
 
 	/**
 	 * @return the email
@@ -96,7 +130,7 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	}
 
 	public boolean isAuthenticated() {
-		return !Strings.isNullOrEmpty(getName()) && !"anonymous".equalsIgnoreCase(getName());
+		return !Strings.isNullOrEmpty(getName()) && !ANONYMOUS.equalsIgnoreCase(getName());
 	}
 
 	/**
@@ -115,21 +149,6 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	}
 
 	/**
-	 * @return the permissions
-	 */
-	public List<String> getPermissions() {
-		return permissions;
-	}
-
-	/**
-	 * @param permissions
-	 *            the permissions to set
-	 */
-	public void setPermissions(List<String> permissions) {
-		this.permissions = permissions;
-	}
-
-	/**
 	 * @return the firstName
 	 */
 	public String getFirstName() {
@@ -137,7 +156,8 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	}
 
 	/**
-	 * @param firstName the firstName to set
+	 * @param firstName
+	 *            the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -151,18 +171,36 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	}
 
 	/**
-	 * @param lastName the lastName to set
+	 * @param lastName
+	 *            the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	public boolean isRegistrationRequired() {
-		return Strings.isNullOrEmpty(email);
-	}
-
 	public AuthenticatedPrincipal remoteAddress(String remoteAddress) {
 		setRemoteAddress(remoteAddress);
+		return this;
+	}
+
+	public boolean isExternal() {
+		return !IdentityProviderType.INTERNAL.equals(getProvider());
+	}
+
+	public boolean isSocialIdentifierSameAsName() {
+		if (Strings.isNullOrEmpty(getSocialIdentifier())) {
+			return true;
+		}
+		return getSocialIdentifier().equals(getEmail());
+	}
+
+	public AuthenticatedPrincipal provider(IdentityProviderType provider) {
+		setProvider(provider);
+		return this;
+	}
+
+	public AuthenticatedPrincipal socialIdentifier(String socialIdentifier2) {
+		setSocialIdentifier(socialIdentifier2);
 		return this;
 	}
 }

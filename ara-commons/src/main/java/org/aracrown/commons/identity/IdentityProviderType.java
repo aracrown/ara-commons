@@ -1,11 +1,21 @@
 package org.aracrown.commons.identity;
 
 public enum IdentityProviderType {
-	FACEBOOK,
-	TWITTER,
-	GOOGLE,
-	GITHUB,
-	LINKEDIN,
-	INTERNAL,
-	OTHER
+	FACEBOOK("light-blue"),
+	TWITTER("aqua"),
+	GOOGLE("red"),
+	GITHUB("grey"),
+	LINKEDIN("aqua"),
+	INTERNAL("green"),
+	OTHER("yellow");
+	
+	private final String color;
+	
+	private IdentityProviderType (String color) {
+		this.color = color;
+	}
+
+	public String color() {
+		return color;
+	}
 }
