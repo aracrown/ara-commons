@@ -9,10 +9,9 @@ import javax.crypto.spec.PBEKeySpec;
 import org.apache.commons.codec.binary.Hex;
 
 public class Hasher {
-	enum Algorythim {
-		PBKDF2WithHmacSHA256, PBKDF2WithHmacSHA512
-	}
-
+	private static final String PBKDF2_WITH_HMAC_SHA256 = "PBKDF2WithHmacSHA256";
+	private static final String PBKDF2_WITH_HMAC_SHA512 = "PBKDF2WithHmacSHA512";
+	
 	private final String password;
 	private final String passwordSalt;
 	private final int hashIterations;
@@ -29,22 +28,22 @@ public class Hasher {
 		this.hashIterations = hashIterations;
 	}
 
-	private String hash(Algorythim type, int length) {
+	private String hash(String algorithm, int length) {
 		PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), passwordSalt.getBytes(), hashIterations, 512);
 		try {
-			SecretKeyFactory skf = SecretKeyFactory.getInstance(type.name());
+			SecretKeyFactory skf = SecretKeyFactory.getInstance(algorithm);
 			byte[] testHash = skf.generateSecret(spec).getEncoded();
 			return Hex.encodeHexString(testHash);
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-			throw new RuntimeException(e);
+			throw new HasherException(String.format("Could not generate the requested hash: %s (Length: %d)", algorithm, length), e);
 		}
 	}
 
 	public String hashSha512() {
-		return hash(Algorythim.PBKDF2WithHmacSHA512, 512);
+		return hash(PBKDF2_WITH_HMAC_SHA512, 512);
 	}
 
 	public String hashSha256() {
-		return hash(Algorythim.PBKDF2WithHmacSHA256, 256);
+		return hash(PBKDF2_WITH_HMAC_SHA256, 256);
 	}
 }

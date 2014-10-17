@@ -16,6 +16,8 @@ import org.aracrown.commons.security.AuthenticationException;
 import org.aracrown.commons.security.SecurityService;
 import org.aracrown.commons.security.UsernamePasswordToken;
 import org.aracrown.commons.ui.html.BootstrapFeedbackPanel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple login panel.
@@ -26,7 +28,8 @@ import org.aracrown.commons.ui.html.BootstrapFeedbackPanel;
  * 
  */
 public class SignInPanel extends Panel {
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(SignInPanel.class);
+	
 	/** The feedback string constant. */
 	private static final String FEEDBACK = "feedback";
 
@@ -108,6 +111,7 @@ public class SignInPanel extends Panel {
 				continueToOriginalDestination();
 				setResponsePage(getApplication().getHomePage());
 			} catch (AuthenticationException e ) {
+				LOGGER.error(String.format("Could not authenticate user: %s", getUsername()), e);
 				error(getLocalizer().getString(e.getMessageKey(), SignInPanel.this, e.getMessage()));
 				Component feedback = get(FEEDBACK);
 				feedback.setVisible(true);
