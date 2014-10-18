@@ -10,9 +10,11 @@ public abstract class AuthenticatedPrincipalBuilder extends AbstractBuilder<Auth
 
 	@Override
 	public AuthenticatedPrincipal build() {
-		name().provider().email().firstName().lastName().timeZone().remoteAddress().lastLoginDate().locale();
+		uniqueIdentifier().name().provider().email().firstName().lastName().timeZone().remoteAddress().lastLoginDate().locale();
 		return super.build();
 	}
+	
+	protected abstract AuthenticatedPrincipalBuilder uniqueIdentifier();
 	
 	protected abstract AuthenticatedPrincipalBuilder remoteAddress();
 

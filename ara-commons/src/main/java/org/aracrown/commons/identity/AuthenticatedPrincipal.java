@@ -27,6 +27,9 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@FormParam("uniqueIdentifier")
+	private Long uniqueIdentifier = -999999999999L;
+	
 	@FormParam("email")
 	private String email;
 
@@ -49,7 +52,7 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	private String socialIdentifier;
 	
 	public AuthenticatedPrincipal() {
-		setName(ANONYMOUS);
+		
 	}
 
 	public AuthenticatedPrincipal(AuthenticatedPrincipal principal) {
@@ -61,6 +64,7 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 		setLocale(principal.getLocale());
 		setProvider(principal.getProvider());
 		setSocialIdentifier(principal.getSocialIdentifier());
+		setUniqueIdentifier(principal.getUniqueIdentifier());
 	}
 
 	/**
@@ -183,10 +187,6 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 		return this;
 	}
 
-	public boolean isExternal() {
-		return !IdentityProviderType.INTERNAL.equals(getProvider());
-	}
-
 	public boolean isSocialIdentifierSameAsName() {
 		if (Strings.isNullOrEmpty(getSocialIdentifier())) {
 			return true;
@@ -206,5 +206,30 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 
 	public UserPrincipal newPrincipal() {
 		return new UserPrincipal(getName(), getRemoteAddress(), getProvider());
+	}
+
+	public boolean hasProfile() {
+		return !Strings.isNullOrEmpty(getFirstName()) || !Strings.isNullOrEmpty(getLastName());
+	}
+
+	/**
+	 * @return the persisted
+	 */
+	public boolean isPersisted() {
+		return uniqueIdentifier != null;
+	}
+
+	/**
+	 * @return the uniqueIdentifier
+	 */
+	public Long getUniqueIdentifier() {
+		return uniqueIdentifier;
+	}
+
+	/**
+	 * @param uniqueIdentifier the uniqueIdentifier to set
+	 */
+	public void setUniqueIdentifier(Long uniqueIdentifier) {
+		this.uniqueIdentifier = uniqueIdentifier;
 	}
 }

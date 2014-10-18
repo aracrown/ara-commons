@@ -37,8 +37,10 @@ import com.mysema.query.types.path.SetPath;
  * Abstract query implementation using QueryDSL project.
  * <p>
  *
- * @param <T> entity path class
- * @param <K> entity class
+ * @param <T>
+ *            entity path class
+ * @param <K>
+ *            entity class
  * @author vicento.ramos
  * @since 1.0.0
  */
@@ -68,8 +70,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	/**
 	 * Default constructor accepting entity manager and entity path class.
 	 *
-	 * @param entityManager JPA entity manager instance used to perform actual query
-	 * @param path          JPA entity queryDSL path
+	 * @param entityManager
+	 *            JPA entity manager instance used to perform actual query
+	 * @param path
+	 *            JPA entity queryDSL path
 	 */
 	public AbstractQuery(EntityManager entityManager, T path) {
 		this.path = path;
@@ -88,8 +92,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
 	 *
-	 * @param target entity field as a target
-	 * @param alias  alias name for join created
+	 * @param target
+	 *            entity field as a target
+	 * @param alias
+	 *            alias name for join created
 	 * @return alias used in join
 	 */
 	protected <P, Z extends Path<P>> Z validateJoin(EntityPath<P> target, Z alias) {
@@ -108,8 +114,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
 	 *
-	 * @param target entity field as a target
-	 * @param alias  alias name for join created
+	 * @param target
+	 *            entity field as a target
+	 * @param alias
+	 *            alias name for join created
 	 * @return alias used in join
 	 */
 	protected <P, Z extends Path<P>> Z validateLeftJoin(EntityPath<P> target, Z alias) {
@@ -120,8 +128,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
 	 *
-	 * @param target entity field as a target
-	 * @param alias  alias name for join created
+	 * @param target
+	 *            entity field as a target
+	 * @param alias
+	 *            alias name for join created
 	 * @return alias used in join
 	 */
 	protected <P, Z extends EntityPathBase<P>> Z validateLeftJoin(ListPath<P, Z> target, Z alias) {
@@ -131,13 +141,15 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 		}
 		return alias;
 	}
-	
+
 	/**
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
 	 *
-	 * @param target entity field as a target
-	 * @param alias  alias name for join created
+	 * @param target
+	 *            entity field as a target
+	 * @param alias
+	 *            alias name for join created
 	 * @return alias used in join
 	 */
 	protected <P, Z extends EntityPathBase<P>> Z validateJoin(ListPath<P, Z> target, Z alias) {
@@ -152,8 +164,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
 	 *
-	 * @param target entity field as a target
-	 * @param alias  alias name for join created
+	 * @param target
+	 *            entity field as a target
+	 * @param alias
+	 *            alias name for join created
 	 * @return alias used in join
 	 */
 	protected <P, Z extends EntityPathBase<P>> Z validateJoin(CollectionPath<P, Z> target, Z alias) {
@@ -168,8 +182,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
 	 *
-	 * @param target entity field as a target
-	 * @param alias  alias name for join created
+	 * @param target
+	 *            entity field as a target
+	 * @param alias
+	 *            alias name for join created
 	 * @return alias used in join
 	 */
 	protected <P, Z extends EntityPathBase<P>> Z validateJoin(SetPath<P, Z> target, Z alias) {
@@ -180,12 +196,21 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 		return alias;
 	}
 
+	private JPAQuery prepareQuery() {
+		onBeforeExecute();
+		return jpaQuery;
+	}
+
+	protected void onBeforeExecute() {
+		// default implementation does not do anything
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public K singleResult() {
-		return jpaQuery.setHint(ORG_HIBERNATE_CACHEABLE, cacheable).singleResult(path);
+		return prepareQuery().setHint(ORG_HIBERNATE_CACHEABLE, cacheable).singleResult(path);
 	}
 
 	/**
@@ -193,7 +218,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 */
 	@Override
 	public List<K> list() {
-		return jpaQuery.list(path);
+		return prepareQuery().list(path);
 	}
 
 	/**
@@ -201,7 +226,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 */
 	@Override
 	public Long count() {
-		return jpaQuery.count();
+		return prepareQuery().count();
 	}
 
 	/**
