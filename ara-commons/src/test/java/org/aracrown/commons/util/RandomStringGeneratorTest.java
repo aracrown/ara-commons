@@ -8,7 +8,7 @@ public class RandomStringGeneratorTest {
 	public void testDefault() {
 		String rnd = new RandomStringGenerator().generateHex();
 		Assert.assertNotNull(rnd);
-		Assert.assertEquals(64, rnd.length());
+		Assert.assertEquals(128, rnd.length());
 		Assert.assertTrue(rnd, rnd.matches("^[a-zA-Z0-9]+$"));
 	}
 

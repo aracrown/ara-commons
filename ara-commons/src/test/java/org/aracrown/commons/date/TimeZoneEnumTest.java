@@ -12,6 +12,7 @@ public class TimeZoneEnumTest {
 		Assert.assertEquals("America/Scoresbysund", tz.getTimeZoneId());
 		Assert.assertEquals("(GMT-01:00/DST) America/Scoresbysund", tz.getName());
 		Assert.assertTrue(tz.isDaylightSavings());
+		Assert.assertEquals("America/Scoresbysund", tz.getZoneId().toString());
 
 		Assert.assertNotNull(GMT.GMTM0100);
 	}
