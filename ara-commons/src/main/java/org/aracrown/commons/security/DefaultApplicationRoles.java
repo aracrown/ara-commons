@@ -1,21 +1,10 @@
 package org.aracrown.commons.security;
 
-public enum DefaultApplicationRoles {
-	GUEST("Guest"),
-	AUTHENTICATED_USER("Authenticated user"), 
-	GUARDIAN_WS_CALLER("Guardian WS caller")
-	;
-	
-	private final String roleName;
-	
-	private DefaultApplicationRoles(String roleName) {
-		this.roleName = roleName;
-	}
+public final class DefaultApplicationRoles {
+	public static final String GUEST = "Guest";
 
-	/**
-	 * @return the roleName
-	 */
-	public String roleName() {
-		return roleName;
-	}
+	public static final String AUTHENTICATED_USER = "Authenticated user";
+	
+	public static final String GUARDIAN_WS_CALLER = "Guardian WS caller";
+
 }
