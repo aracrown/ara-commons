@@ -2,7 +2,9 @@ package org.aracrown.commons.security;
 
 public enum DefaultApplicationRoles {
 	GUEST("Guest"),
-	AUTHENTICATED_USER("Authenticated user");
+	AUTHENTICATED_USER("Authenticated user"), 
+	GUARDIAN_WS_CALLER("Guardian WS caller")
+	;
 	
 	private final String roleName;
 	

@@ -18,4 +18,8 @@ public enum IdentityProviderType {
 	public String color() {
 		return color;
 	}
+	
+	public String value() {
+		return name().toLowerCase();
+	}
 }
