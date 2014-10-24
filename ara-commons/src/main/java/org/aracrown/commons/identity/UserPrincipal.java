@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.security.Principal;
 
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.FormParam;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -15,14 +14,11 @@ public class UserPrincipal implements Serializable, Principal {
 	private static final long serialVersionUID = 1L;
 
 	@NotNull
-	@FormParam("username")
 	private String name;
 	
-	@FormParam("remoteAddress")
 	private String remoteAddress;
 	
 	@NotNull
-	@FormParam("provider")
 	private IdentityProviderType provider;
 	
 	public UserPrincipal() {

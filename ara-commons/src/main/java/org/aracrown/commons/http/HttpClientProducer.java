@@ -74,7 +74,7 @@ public final class HttpClientProducer {
 		// Default connection manager
 		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
 		cm.setMaxTotal(MAX_TOTAL);
-		cm.setDefaultMaxPerRoute(MAX_ROUTE);
+		cm.setDefaultMaxPerRoute(MAX_ROUTE); 
 
 		// Default request config
 		RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(TIMEOUT_CON).setConnectTimeout(TIMEOUT_CON)
