@@ -4,7 +4,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Locale;
 
-import javax.ws.rs.FormParam;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,16 +26,12 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@FormParam("uniqueIdentifier")
 	private Long uniqueIdentifier = -999999999999L;
 	
-	@FormParam("email")
 	private String email;
 
-	@FormParam("firstName")
 	private String firstName;
 	
-	@FormParam("lastName")
 	private String lastName;
 
 	@XmlJavaTypeAdapter(ZoneIdXmlAdapter.class)
@@ -48,7 +43,6 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	@XmlJavaTypeAdapter(LocaleXmlAdapter.class)
 	private Locale locale;
 
-	@FormParam("socialIdentifier")
 	private String socialIdentifier;
 	
 	public AuthenticatedPrincipal() {
