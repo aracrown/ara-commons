@@ -1,5 +1,8 @@
 package org.aracrown.commons.util;
 
+import javax.enterprise.inject.Vetoed;
+
+@Vetoed
 public class ProxiedParam<T> {
 	private T param;
 
