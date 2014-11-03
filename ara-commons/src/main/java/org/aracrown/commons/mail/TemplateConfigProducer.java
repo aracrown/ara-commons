@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 
 import org.aracrown.commons.util.ProxiedParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.base.Strings;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
@@ -18,8 +22,11 @@ import freemarker.template.Configuration;
 
 @ApplicationScoped
 public class TemplateConfigProducer {
-	private static final String DEFAULT_TEMPLATE_DIR = "/tmp/templates";
 	private static final Logger LOGGER = LoggerFactory.getLogger(TemplateConfigProducer.class);
+
+	@Inject
+	@TemplateDirectory
+	private Instance<ProxiedParam<String>> templateDirectory;
 
 	@Produces
 	@ApplicationScoped
@@ -41,12 +48,15 @@ public class TemplateConfigProducer {
 
 	private TemplateLoader[] getTemplateLoaders() {
 		ClassTemplateLoader ctl = new ClassTemplateLoader(getClass(), "/templates");
+		String templateDir = (templateDirectory.get() != null ? templateDirectory.get().getParam() : null);
 		try {
-			FileTemplateLoader ftl1 = new FileTemplateLoader(new File(DEFAULT_TEMPLATE_DIR));
-			return new TemplateLoader[] { ftl1, ctl };
+			if (!Strings.isNullOrEmpty(templateDir)) {
+				FileTemplateLoader ftl1 = new FileTemplateLoader(new File(templateDir));
+				return new TemplateLoader[] { ftl1, ctl };
+			}
 		} catch (IOException e) {
-			LOGGER.warn("Directory does not exist: {}", DEFAULT_TEMPLATE_DIR, e);
-			return new TemplateLoader[] { ctl };
+			LOGGER.warn("Directory does not exist: {}", templateDir, e);
 		}
+		return new TemplateLoader[] { ctl };
 	}
 }
