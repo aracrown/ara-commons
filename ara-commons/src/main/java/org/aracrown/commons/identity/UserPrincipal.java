@@ -30,6 +30,11 @@ public class UserPrincipal implements Serializable, Principal {
 		this.provider = provider;
 	}
 
+	public UserPrincipal(String username2) {
+		this.name = username2;
+		provider = IdentityProviderType.INTERNAL;
+	}
+
 	/**
 	 * @return the name
 	 */

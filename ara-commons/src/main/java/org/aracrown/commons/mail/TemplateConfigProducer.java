@@ -48,7 +48,8 @@ public class TemplateConfigProducer {
 
 	private TemplateLoader[] getTemplateLoaders() {
 		ClassTemplateLoader ctl = new ClassTemplateLoader(getClass(), "/templates");
-		String templateDir = (templateDirectory.get() != null ? templateDirectory.get().getParam() : null);
+		
+		String templateDir = resolveTemplateDir();
 		try {
 			if (!Strings.isNullOrEmpty(templateDir)) {
 				FileTemplateLoader ftl1 = new FileTemplateLoader(new File(templateDir));
@@ -58,5 +59,13 @@ public class TemplateConfigProducer {
 			LOGGER.warn("Directory does not exist: {}", templateDir, e);
 		}
 		return new TemplateLoader[] { ctl };
+	}
+
+	private String resolveTemplateDir() {
+		if (templateDirectory.isUnsatisfied()) {
+			LOGGER.warn("Configuration issue for @TemplateDirectory: Parameter was not created.");
+			return null;
+		}
+		return (templateDirectory.get() != null) ? templateDirectory.get().getParam() : null;
 	}
 }
