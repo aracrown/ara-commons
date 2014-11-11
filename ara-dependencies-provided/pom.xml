@@ -19,33 +19,33 @@
 	<build>
 		<plugins>
 			<plugin>
-                <groupId>external.atlassian.jgitflow</groupId>
-                <artifactId>jgitflow-maven-plugin</artifactId>
-                <version>1.0-m3</version>
-                <configuration>
-                        <flowInitContext>
-                                <developBranchName>development</developBranchName>
-                                <featureBranchPrefix>feature-</featureBranchPrefix>
-                                <releaseBranchPrefix>release-</releaseBranchPrefix>
-                                <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
-                        </flowInitContext>
-                </configuration>
-            </plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>1.0-m3</version>
+				<configuration>
+					<flowInitContext>
+						<developBranchName>development</developBranchName>
+						<featureBranchPrefix>feature-</featureBranchPrefix>
+						<releaseBranchPrefix>release-</releaseBranchPrefix>
+						<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+					</flowInitContext>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
 	<distributionManagement>
-                <repository>
-                        <id>deployment</id>
-                        <name>Internal Releases</name>
-                        <url>http://www.aracrown.org/nexus/content/repositories/releases/</url>
-                </repository>
-                <snapshotRepository>
-                        <id>deployment</id>
-                        <name>Internal snapshots</name>
-                        <url>http://www.aracrown.org/nexus/content/repositories/snapshots/</url>
-                </snapshotRepository>
-        </distributionManagement>
+		<repository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://www.aracrown.org/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>deployment</id>
+			<name>Internal snapshots</name>
+			<url>http://www.aracrown.org/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<dependencies>
 		<dependency>
@@ -103,11 +103,11 @@
 			<artifactId>resteasy-client</artifactId>
 			<version>${resteasy.version}</version>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxb-provider</artifactId>
-            <version>${resteasy.version}</version>
-        </dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
 	</dependencies>
 </project>
