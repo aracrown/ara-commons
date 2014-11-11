@@ -12,7 +12,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<querydsl.version>3.5.1</querydsl.version>
 		<guava.version>18.0</guava.version>
-        <liquibase.version>3.2.3</liquibase.version>
+        <liquibase.version>3.1.1</liquibase.version>
         <owner.version>1.0.5.1</owner.version>
         <gson.version>2.3</gson.version>
         <freemarker.version>2.3.21</freemarker.version>
