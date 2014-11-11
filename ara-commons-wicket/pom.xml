@@ -16,7 +16,6 @@
 		<dependency>
 			<groupId>org.aracrown</groupId>
 			<artifactId>ara-dependencies-wicket</artifactId>
-			<version>1.0.5-SNAPSHOT</version>
 			<type>pom</type> 
 		</dependency>
 		<dependency>

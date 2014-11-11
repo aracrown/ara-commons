@@ -15,22 +15,22 @@
 	</properties>
 
 	<build>
-                <plugins>
-                        <plugin>
-                                <groupId>external.atlassian.jgitflow</groupId>
-                                <artifactId>jgitflow-maven-plugin</artifactId>
-                                <version>1.0-m3</version>
-                                <configuration>
-                                        <flowInitContext>
-                                                <developBranchName>development</developBranchName>
-                                                <featureBranchPrefix>feature-</featureBranchPrefix>
-                                                <releaseBranchPrefix>release-</releaseBranchPrefix>
-                                                <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
-                                        </flowInitContext>
-                                </configuration>
-                        </plugin>
-                </plugins>
-        </build>
+		<plugins>
+			<plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>1.0-m3</version>
+				<configuration>
+					<flowInitContext>
+						<developBranchName>development</developBranchName>
+						<featureBranchPrefix>feature-</featureBranchPrefix>
+						<releaseBranchPrefix>release-</releaseBranchPrefix>
+						<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+					</flowInitContext>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<distributionManagement>
 		<repository>
@@ -101,6 +101,12 @@
 			<groupId>org.jglue.cdi-unit</groupId>
 			<artifactId>cdi-unit</artifactId>
 			<version>3.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<version>3.0.9.Final</version>
 		</dependency>
 	</dependencies>
 

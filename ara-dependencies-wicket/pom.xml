@@ -7,43 +7,43 @@
 	<version>1.0.5-SNAPSHOT</version>
 	<name>ara-dependencies-wicket</name>
 	<description>Wicket dependency package.</description>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<wicket.version>6.15.0</wicket.version>
+		<wicket.version>6.18.0</wicket.version>
 	</properties>
 
 	<build>
-                <plugins>
-                        <plugin>
-                                <groupId>external.atlassian.jgitflow</groupId>
-                                <artifactId>jgitflow-maven-plugin</artifactId>
-                                <version>1.0-m3</version>
-                                <configuration>
-                                        <flowInitContext>
-                                                <developBranchName>development</developBranchName>
-                                                <featureBranchPrefix>feature-</featureBranchPrefix>
-                                                <releaseBranchPrefix>release-</releaseBranchPrefix>
-                                                <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
-                                        </flowInitContext>
-                                </configuration>
-                        </plugin>
-                </plugins>
-        </build>
+		<plugins>
+			<plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>1.0-m3</version>
+				<configuration>
+					<flowInitContext>
+						<developBranchName>development</developBranchName>
+						<featureBranchPrefix>feature-</featureBranchPrefix>
+						<releaseBranchPrefix>release-</releaseBranchPrefix>
+						<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+					</flowInitContext>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<distributionManagement>
-                <repository>
-                        <id>deployment</id>
-                        <name>Internal Releases</name>
-                        <url>http://www.aracrown.org/nexus/content/repositories/releases/</url>
-                </repository>
-                <snapshotRepository>
-                        <id>deployment</id>
-                        <name>Internal snapshots</name>
-                        <url>http://www.aracrown.org/nexus/content/repositories/snapshots/</url>
-                </snapshotRepository>
-        </distributionManagement>
-	
+		<repository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://www.aracrown.org/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>deployment</id>
+			<name>Internal snapshots</name>
+			<url>http://www.aracrown.org/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<dependencies>
 		<!-- Apache Wicket -->
 		<dependency>
@@ -83,16 +83,22 @@
 			<artifactId>wicketstuff-objectautocomplete</artifactId>
 			<version>${wicket.version}</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-bean-validation</artifactId>
+            <version>${wicket.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>com.vaynberg.wicket.select2</groupId>
 			<artifactId>wicket-select2</artifactId>
-			<version>2.2.3</version>
+			<version>2.3</version>
 		</dependency>
 
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>
 			<artifactId>wicket-bootstrap-extensions</artifactId>
-			<version>0.9.3</version>
+			<version>0.9.7</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>antlr</artifactId>

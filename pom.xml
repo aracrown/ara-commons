@@ -10,11 +10,17 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<querydsl.version>3.3.3</querydsl.version>
-		<guava.version>17.0</guava.version>		
+		<querydsl.version>3.5.1</querydsl.version>
+		<guava.version>18.0</guava.version>
+        <liquibase.version>3.2.3</liquibase.version>
+        <owner.version>1.0.5.1</owner.version>
+        <gson.version>2.3</gson.version>
+        <freemarker.version>2.3.21</freemarker.version>
+        
+        
 		<ara-dependencies-test.version>1.0.5-SNAPSHOT</ara-dependencies-test.version>
 		<ara-dependencies-provided.version>1.0.5-SNAPSHOT</ara-dependencies-provided.version>
-	
+        <ara-dependencies-wicket.version>1.0.5-SNAPSHOT</ara-dependencies-wicket.version>
 	</properties>
 	
 	<licenses>
@@ -50,17 +56,17 @@
 	<dependencyManagement>
 		<dependencies>
 			<!-- Migration utilities -->
-                        <dependency>
-                                <groupId>org.liquibase</groupId>
-                                <artifactId>liquibase-core</artifactId>
-                                <version>3.1.1</version>
-                        </dependency>
+            <dependency>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-core</artifactId>
+                    <version>${liquibase.version}</version>
+            </dependency>
 
 			<!-- Owner => to handle property files -->
 			<dependency>
 				<groupId>org.aeonbits.owner</groupId>
 				<artifactId>owner</artifactId>
-				<version>1.0.5</version>
+                <version>${owner.version}</version>
 			</dependency>
 		
 			<!-- Guava -->
@@ -74,33 +80,36 @@
 			<dependency>
 				<groupId>com.google.code.gson</groupId>
 				<artifactId>gson</artifactId>
-				<version>2.2.4</version>
+                <version>${gson.version}</version>
 			</dependency>
-
-			<!-- Apache shiro -->
-                        <dependency>
-                                <groupId>org.apache.shiro</groupId>
-                                <artifactId>shiro-core</artifactId>
-                                <version>1.2.3</version>
-                        </dependency>
-                        <dependency>
-                                <groupId>org.apache.shiro</groupId>
-                                <artifactId>shiro-web</artifactId>
-                                <version>1.2.3</version>
-                        </dependency>
+            
+            <!-- Freemarker -->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
 
 			<!-- Query DSL -->
-                        <dependency>
-                                <groupId>com.mysema.querydsl</groupId>
-                                <artifactId>querydsl-jpa</artifactId>
-                                <version>${querydsl.version}</version>
-                                <exclusions>
-                                        <exclusion>
-                                                <artifactId>hibernate-jpa-2.0-api</artifactId>
-                                                <groupId>org.hibernate.javax.persistence</groupId>
-                                        </exclusion>
-                                </exclusions>
-                        </dependency>      
+            <dependency>
+                <groupId>com.mysema.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>${querydsl.version}</version>
+                <exclusions>
+                        <exclusion>
+                                <artifactId>hibernate-jpa-2.0-api</artifactId>
+                                <groupId>org.hibernate.javax.persistence</groupId>
+                        </exclusion>
+                </exclusions>
+            </dependency>
+            
+            <!-- Wicket dependencies -->
+            <dependency>
+                <groupId>org.aracrown</groupId>
+                <artifactId>ara-dependencies-wicket</artifactId>
+                <version>${ara-dependencies-wicket.version}</version>
+                <type>pom</type>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 	
@@ -110,6 +119,18 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
+        
+        <!-- Owner => to handle property files -->
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+        </dependency>
+        
+        <!-- Gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
 		
 		<!-- Provided utilities -->
 		<dependency>
@@ -135,7 +156,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				 <version>3.1</version>
+				 <version>3.2</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -144,7 +165,7 @@
 			<plugin>
 				<groupId>external.atlassian.jgitflow</groupId>
 				<artifactId>jgitflow-maven-plugin</artifactId>
-				<version>1.0-m3</version>
+				<version>1.0-m4.3</version>
 				<configuration>
             				<flowInitContext>		
          					<developBranchName>development</developBranchName>
@@ -167,7 +188,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <!-- Minimal supported version is 2.4 -->
-            <version>2.13</version>
+            <version>2.18</version>
             <configuration>
               <properties>
                 <property>
@@ -184,7 +205,7 @@
         <dependency>
           <groupId>org.codehaus.sonar-plugins.java</groupId>
           <artifactId>sonar-jacoco-listeners</artifactId>
-          <version>1.2</version>
+          <version>1.5.1</version>
           <scope>test</scope>
         </dependency>
       </dependencies>
