@@ -16,6 +16,8 @@ public class MailSender {
 	private String subject;
 
 	private String content;
+	
+	private String from;
 
 	public MailSender(Session mailSession) {
 		this.mailSession = mailSession;
@@ -35,11 +37,17 @@ public class MailSender {
 		this.content = outputContent;
 		return this;
 	}
+	
+	public MailSender from(String from) {
+		this.from = from;
+		return this;
+	}
 
 	public void send() throws MessagingException {
 		MimeMessage m = new MimeMessage(mailSession);
 		Address[] to = new InternetAddress[] { new InternetAddress(emailTo) };
 
+		m.setFrom(from);
 		m.setRecipients(Message.RecipientType.TO, to);
 		m.setSubject(subject);
 		m.setSentDate(new java.util.Date());
