@@ -50,15 +50,7 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	}
 
 	public AuthenticatedPrincipal(AuthenticatedPrincipal principal) {
-		setName(principal.getName());
-		setEmail(principal.getEmail());
-		setFirstName(principal.getFirstName());
-		setLastName(principal.getLastName());
-		setZoneId(principal.getZoneId());
-		setLocale(principal.getLocale());
-		setProvider(principal.getProvider());
-		setSocialIdentifier(principal.getSocialIdentifier());
-		setUniqueIdentifier(principal.getUniqueIdentifier());
+		updateFrom(principal);
 	}
 
 	/**
@@ -225,5 +217,21 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	 */
 	public void setUniqueIdentifier(Long uniqueIdentifier) {
 		this.uniqueIdentifier = uniqueIdentifier;
+	}
+	
+	public boolean isExternal() {
+		return getProvider() != null && !IdentityProviderType.INTERNAL.equals(getProvider());
+	}
+
+	public void updateFrom(AuthenticatedPrincipal principal) {
+		setName(principal.getName());
+		setEmail(principal.getEmail());
+		setFirstName(principal.getFirstName());
+		setLastName(principal.getLastName());
+		setZoneId(principal.getZoneId());
+		setLocale(principal.getLocale());
+		setProvider(principal.getProvider());
+		setSocialIdentifier(principal.getSocialIdentifier());
+		setUniqueIdentifier(principal.getUniqueIdentifier());
 	}
 }
