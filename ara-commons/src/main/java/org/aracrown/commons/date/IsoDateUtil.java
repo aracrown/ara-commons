@@ -17,6 +17,7 @@ package org.aracrown.commons.date;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -175,5 +176,13 @@ public final class IsoDateUtil {
 		LocalDate localDate = LocalDate.parse(value, formatter);
 		
 		return ZonedDateTime.of(localDate, LocalTime.now(), ZoneOffset.UTC);
+	}
+
+	public ZonedDateTime midnight(ZonedDateTime dateTime) {
+		return dateTime.withHour(0).withMinute(0).withSecond(0).withNano(0);
+	}
+	
+	public ZonedDateTime midnight() {
+		return midnight(ZonedDateTime.now());
 	}
 }

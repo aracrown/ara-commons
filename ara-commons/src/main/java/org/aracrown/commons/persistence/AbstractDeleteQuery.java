@@ -18,7 +18,7 @@ import com.mysema.query.types.path.EntityPathBase;
  * @param <K>
  *            entity class
  */
-public class AbstractDeleteQuery<T extends EntityPathBase<K>, K> implements DeleteQuery<T>{
+public class AbstractDeleteQuery<T extends EntityPathBase<K>, K> implements DeleteQuery {
 	/** The JPA delete instance. */
 	private final JPADeleteClause deleteClause;
 

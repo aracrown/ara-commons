@@ -266,4 +266,13 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 		this.cacheable = false;
 		return (Q) this;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <Q extends Query<K>> Q createdBy(String username) {
+		return (Q) this;
+	}
 }

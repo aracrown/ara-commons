@@ -13,25 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.aracrown.commons.persistence;
+package org.aracrown.commons.rest;
 
+import java.io.Serializable;
 
 /**
- * 
- * Delete query interface defining methods available to perform the required query.
+ * Abstract class for resource representation. Contains required properties for
+ * each resource.
  * 
  * @author vicento.ramos
  * 
- * @param <T>
- * 
  * @since 1.0.0
+ * 
  */
-public interface DeleteQuery {
+public abstract class Resource implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** Resource location. */
+	private Long id;
 
 	/**
-	 * Performs the deletion action.
-	 * 
-	 * @return the amount of affected rows
+	 * @return the id
 	 */
-	long execute();
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

@@ -68,4 +68,15 @@ public interface Query<T> {
 	 * @return how many records found
 	 */
 	Long count();
+	
+	/**
+	 * Filters entities by provided user, who created entity.
+	 * 
+	 * @param username
+	 *            user name to filter query by
+	 * @param <Q>
+	 *            query instance type
+	 * @return this instance
+	 */
+	<Q extends Query<T>> Q createdBy(String username);
 }
