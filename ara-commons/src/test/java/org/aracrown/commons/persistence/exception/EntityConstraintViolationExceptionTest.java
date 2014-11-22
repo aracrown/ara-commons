@@ -15,6 +15,11 @@
  */
 package org.aracrown.commons.persistence.exception;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+
 import org.aracrown.commons.persistence.exception.EntityConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,7 +28,8 @@ public class EntityConstraintViolationExceptionTest {
 	@Test
 	public void testException_1() {
 		try {
-			throw new EntityConstraintViolationException("message", new Throwable());
+			Set<ConstraintViolation<String>> items = new HashSet<>();
+			throw new EntityConstraintViolationException("message", items);
 		} catch (EntityConstraintViolationException e) {
 			Assert.assertEquals("message", e.getMessage());
 		}

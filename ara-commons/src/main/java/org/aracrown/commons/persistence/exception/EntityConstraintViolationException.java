@@ -15,6 +15,10 @@
  */
 package org.aracrown.commons.persistence.exception;
 
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+
 /**
  * The class <i>EntityConstraintViolationException</i> is a checked exception. It is used to notify the caller when entity constraint violation
  * occurs.
@@ -24,7 +28,7 @@ package org.aracrown.commons.persistence.exception;
  * @since 1.0.0
  * 
  */
-public class EntityConstraintViolationException extends Exception {
+public class EntityConstraintViolationException extends EntityValidationException {
 
 	/**
 	 * 
@@ -40,17 +44,17 @@ public class EntityConstraintViolationException extends Exception {
 	public EntityConstraintViolationException(String message) {
 		super(message);
 	}
-
+	
 	/**
-	 * Constructs a new exception with the specified detail message and cause.
+	 * Default constructor takes constraint violation collection.
 	 * 
 	 * @param message
-	 *            the detail message (which is saved for later retrieval by the Throwable.getMessage() method).
-	 * @param cause
-	 *            the cause (which is saved for later retrieval by the Throwable.getCause() method). (A null value is permitted, and indicates that
-	 *            the cause is nonexistent or unknown.)
+	 *            the detail message. The detail message is saved for later
+	 *            retrieval by the {@link #getMessage()} method.
+	 * @param constraintViolations
+	 *            set of unsorted violations
 	 */
-	public EntityConstraintViolationException(String message, Throwable cause) {
-		super(message, cause);
+	public EntityConstraintViolationException(String message, Set<? extends ConstraintViolation<?>> constraintViolations) {
+		super(message, constraintViolations);
 	}
 }
