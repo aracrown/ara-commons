@@ -15,13 +15,14 @@
  */
 package org.aracrown.commons.rest;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Simple response wrapper of result collection.
@@ -51,6 +52,14 @@ public class ResourceCollectionResponse<E> {
 	/** Collection of items to be returned. */
 	@XmlElement
     private List<E> items = new ArrayList<>();
+
+	public ResourceCollectionResponse() {}
+	
+	public ResourceCollectionResponse(Long currentPage, Long pageSize) {
+		page(currentPage, pageSize);
+	}
+	
+	
 
 	/**
 	 * @param items the items to set
@@ -129,5 +138,16 @@ public class ResourceCollectionResponse<E> {
 	public void addItems(Collection<E> itemsToAdd) {
 		items.addAll(itemsToAdd);
 		setCount((long) items.size());
+	}
+
+	public ResourceCollectionResponse<E> totalCount(Long totalCount) {
+		this.total = totalCount;
+		return this;
+	}
+	
+	private ResourceCollectionResponse<E> page(Long currentPage, Long pageSize) {
+		this.currentPage = currentPage;
+		this.pageSize = pageSize;
+		return this;
 	}
 }
