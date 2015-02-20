@@ -34,7 +34,7 @@ public class AccountFullNameBuilder {
 			fullName.append(separator);
 			fullName.append(lastName.toUpperCase().trim());
 		}
-		while (fullName.lastIndexOf(".") == fullName.length() - 1) {
+		while (fullName.lastIndexOf(".") == fullName.length() - 1 && fullName.length()  > 0) {
 			fullName.deleteCharAt(fullName.length() - 1);
 		}
 		return fullName.toString().trim();
