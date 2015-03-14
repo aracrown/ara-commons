@@ -51,18 +51,18 @@ public class ResourceCollectionResponse<E> {
 
 	/** Collection of items to be returned. */
 	@XmlElement
-    private List<E> items = new ArrayList<>();
+	private List<E> items = new ArrayList<>();
 
-	public ResourceCollectionResponse() {}
-	
+	public ResourceCollectionResponse() {
+	}
+
 	public ResourceCollectionResponse(Long currentPage, Long pageSize) {
 		page(currentPage, pageSize);
 	}
-	
-	
 
 	/**
-	 * @param items the items to set
+	 * @param items
+	 *            the items to set
 	 */
 	public void setItems(List<E> items) {
 		this.items = items;
@@ -134,7 +134,7 @@ public class ResourceCollectionResponse<E> {
 	public void setCurrentPage(Long currentPage) {
 		this.currentPage = currentPage;
 	}
-	
+
 	public void addItems(Collection<E> itemsToAdd) {
 		items.addAll(itemsToAdd);
 		setCount((long) items.size());
@@ -144,7 +144,7 @@ public class ResourceCollectionResponse<E> {
 		this.total = totalCount;
 		return this;
 	}
-	
+
 	private ResourceCollectionResponse<E> page(Long currentPage, Long pageSize) {
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;

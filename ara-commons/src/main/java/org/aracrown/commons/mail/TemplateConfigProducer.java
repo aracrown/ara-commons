@@ -33,8 +33,7 @@ public class TemplateConfigProducer {
 	public ProxiedParam<Configuration> produceConfiguration() {
 		Configuration cfg = createFreemarkerConfiguration();
 
-		ProxiedParam<Configuration> configurationParam = new ProxiedParam<>(cfg);
-		return configurationParam;
+		return new ProxiedParam<>(cfg);
 	}
 
 	private Configuration createFreemarkerConfiguration() {
