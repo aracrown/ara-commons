@@ -15,7 +15,6 @@
  */
 package org.aracrown.commons.persistence.exception;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -41,18 +40,7 @@ public class EntityValidationException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	/** The set of constraint violations. */
-	private Set<? extends ConstraintViolation<?>> constraintViolations = new HashSet<>();
-
-	/**
-	 * Default constructor takes constraint violation collection.
-	 * 
-	 * @param message
-	 *            the detail message. The detail message is saved for later
-	 *            retrieval by the {@link #getMessage()} method.
-	 */
-	public EntityValidationException(String message) {
-		super(message);
-	}
+	private final Set<? extends ConstraintViolation<?>> constraintViolations;
 	
 	/**
 	 * Default constructor takes constraint violation collection.
@@ -85,7 +73,7 @@ public class EntityValidationException extends RuntimeException {
 	 */
 	@Override
 	public String toString() {
-		if (!constraintViolations.isEmpty()) {
+		if (constraintViolations != null && !constraintViolations.isEmpty()) {
 			return ConstraintViolationBuilder.get().parseViolations(constraintViolations).toString();
 		}
 		return getMessage();

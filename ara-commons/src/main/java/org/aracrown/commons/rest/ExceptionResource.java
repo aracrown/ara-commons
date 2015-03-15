@@ -14,7 +14,7 @@ import com.google.common.base.Strings;
  * @since 1.0.0
  */
 @XmlRootElement
-public class RestException implements Serializable {
+public class ExceptionResource implements Serializable {
 	/**
 	 * 
 	 */
@@ -35,7 +35,7 @@ public class RestException implements Serializable {
 	/**
 	 * Default constructor.
 	 */
-	public RestException() {
+	public ExceptionResource() {
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class RestException implements Serializable {
 	 * @param throwable
 	 *            exception as input to be able to construct the entity
 	 */
-	public RestException(Throwable throwable) {
+	public ExceptionResource(Throwable throwable) {
 		this.exceptionClassName = throwable.getClass().getName();
 		this.exceptionMessage = throwable.getMessage();
 		if (Strings.isNullOrEmpty(this.exceptionMessage)) {

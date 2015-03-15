@@ -42,7 +42,7 @@ public class EntityConstraintViolationException extends EntityValidationExceptio
 	 *            the detail message (which is saved for later retrieval by the Throwable.getMessage() method).
 	 */
 	public EntityConstraintViolationException(String message) {
-		super(message);
+		super(message, null);
 	}
 	
 	/**
