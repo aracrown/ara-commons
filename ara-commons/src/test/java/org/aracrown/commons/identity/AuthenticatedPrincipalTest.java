@@ -89,6 +89,8 @@ public class AuthenticatedPrincipalTest {
 		Assert.assertEquals("name",up.getName());
 		Assert.assertEquals(null,up.getRemoteAddress());
 		Assert.assertEquals(IdentityProviderType.INTERNAL,up.getProvider());
+		Assert.assertEquals("internal",up.getProvider().value());
+		Assert.assertEquals(IdentityProviderType.INTERNAL,IdentityProviderType.valueOf("INTERNAL"));
 	}
 
 	private void assertPrincipal(AuthenticatedPrincipal p) {
