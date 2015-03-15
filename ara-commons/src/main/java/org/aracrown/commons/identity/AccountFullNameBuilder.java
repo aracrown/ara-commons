@@ -14,8 +14,8 @@ public class AccountFullNameBuilder {
 
 	public String build(String defaultValue) {
 		String fullName = build();
-		if (Strings.isNullOrEmpty(fullName)) {
-			fullName = defaultValue;
+		if (Strings.isNullOrEmpty(fullName) && !Strings.isNullOrEmpty(defaultValue)) {
+			fullName = defaultValue.trim();
 		}
 		return fullName;
 	}
@@ -31,7 +31,9 @@ public class AccountFullNameBuilder {
 			fullName.append(firstName.trim());
 		}
 		if (!Strings.isNullOrEmpty(lastName)) {
-			fullName.append(separator);
+			if (fullName.length() > 0) {
+				fullName.append(separator);
+			}
 			fullName.append(lastName.toUpperCase().trim());
 		}
 		while (fullName.lastIndexOf(".") == fullName.length() - 1 && fullName.length()  > 0) {
