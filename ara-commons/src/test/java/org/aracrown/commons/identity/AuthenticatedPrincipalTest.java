@@ -173,6 +173,12 @@ public class AuthenticatedPrincipalTest {
 			getEntity().setName("name");
 			return this;
 		}
+
+		@Override
+		protected AuthenticatedPrincipalBuilder lastLoginIpAddress() {
+			getEntity().setLastLoginHostName("localhost");
+			return this;
+		}
 		
 	}
 }
