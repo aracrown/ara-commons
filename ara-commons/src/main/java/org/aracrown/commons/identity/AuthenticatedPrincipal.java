@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.aracrown.commons.date.IsoDateUtil;
 import org.aracrown.commons.identity.adapters.LocaleXmlAdapter;
 import org.aracrown.commons.identity.adapters.ZoneIdXmlAdapter;
 import org.aracrown.commons.identity.adapters.ZonedDateTimeXmlAdapter;
@@ -40,6 +41,8 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	@XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
 	private ZonedDateTime lastLoginDate;
 
+	private String lastLoginHostName;
+	
 	@XmlJavaTypeAdapter(LocaleXmlAdapter.class)
 	private Locale locale;
 
@@ -233,5 +236,23 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 		setProvider(principal.getProvider());
 		setSocialIdentifier(principal.getSocialIdentifier());
 		setUniqueIdentifier(principal.getUniqueIdentifier());
+	}
+	
+	public String getIsoLastLoginDate() {
+		return IsoDateUtil.get().format(getLastLoginDate(), getLocale(), getZoneId());
+	}
+
+	/**
+	 * @return the lastLoginHostName
+	 */
+	public String getLastLoginHostName() {
+		return lastLoginHostName;
+	}
+
+	/**
+	 * @param lastLoginHostName the lastLoginHostName to set
+	 */
+	public void setLastLoginHostName(String lastLoginHostName) {
+		this.lastLoginHostName = lastLoginHostName;
 	}
 }
