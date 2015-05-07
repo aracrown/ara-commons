@@ -44,12 +44,12 @@
   		<repository>
      			<id>deployment</id>
      			<name>Internal Releases</name>
-     			<url>http://www.aracrown.org/nexus/content/repositories/releases/</url>
+     			<url>http://www.aracrown.com/nexus/content/repositories/releases/</url>
   		</repository>
   		<snapshotRepository>
      			<id>deployment</id>
      			<name>Internal snapshots</name>
-     			<url>http://www.aracrown.org/nexus/content/repositories/snapshots/</url>
+     			<url>http://www.aracrown.com/nexus/content/repositories/snapshots/</url>
   		</snapshotRepository>
 	</distributionManagement>
 	
