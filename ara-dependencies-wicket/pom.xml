@@ -10,7 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<wicket.version>6.18.0</wicket.version>
+		<wicket.version>6.19.0</wicket.version>
 	</properties>
 
 	<build>
@@ -18,7 +18,7 @@
 			<plugin>
 				<groupId>external.atlassian.jgitflow</groupId>
 				<artifactId>jgitflow-maven-plugin</artifactId>
-				<version>1.0-m3</version>
+				<version>1.0-m5.1</version>
 				<configuration>
 					<flowInitContext>
 						<developBranchName>development</developBranchName>
@@ -98,7 +98,7 @@
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>
 			<artifactId>wicket-bootstrap-extensions</artifactId>
-			<version>0.9.7</version>
+			<version>0.10.0</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>antlr</artifactId>
