@@ -18,10 +18,10 @@ package org.aracrown.commons.persistence;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
+import org.aracrown.commons.persistence.exception.EntityConstraintViolationException;
 import org.aracrown.commons.persistence.exception.EntityDeleteException;
 import org.aracrown.commons.persistence.exception.EntityNotFoundException;
 import org.aracrown.commons.persistence.exception.EntitySaveException;
-import org.aracrown.commons.persistence.exception.EntityValidationException;
 import org.aracrown.commons.util.Exceptions;
 import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
@@ -99,11 +99,11 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	 * @throws EntitySaveException
 	 *             exception is thrown if persistence engine was not able to
 	 *             persist the entity.
-	 * @throws EntityValidationException
+	 * @throws EntityConstraintViolationException
 	 *             constraint validation is thrown if was detected by exception
 	 *             handler. Otherwise original exception is re-thrown.
 	 */
-	public <E> E save(E entity) throws EntitySaveException, EntityValidationException {
+	public <E> E save(E entity) {
 		E mergedEntity;
 		try {
 			mergedEntity = getEntityManager().merge(entity);
@@ -112,12 +112,12 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 		} catch (javax.validation.ConstraintViolationException e) {
 			String message = String.format("Persistence exception occurred when trying to validate the entity [%s].", entity);
 			LOGGER.debug(message, e);
-			throw new EntityValidationException(message, e.getConstraintViolations());
+			throw new EntityConstraintViolationException(message, e.getConstraintViolations());
 		} catch (PersistenceException e) {
 			String message = String.format("Persistence exception occurred when trying to save the entity [%s].", entity);
 			LOGGER.debug(message, e);
 			EntitySaveException newException = new EntitySaveException(message, e);
-			Exceptions.get().throwNewIfContains(e, ConstraintViolationException.class, newException);
+			Exceptions.get().throwNewIfContains(e, ConstraintViolationException.class, new EntityConstraintViolationException(e.getMessage()));
 			throw newException;
 		}
 	}
@@ -158,11 +158,11 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 			throw newException;
 		}
 	}
-	
+
 	public <E> E merge(E entity) {
 		return getEntityManager().merge(entity);
 	}
-	
+
 	/**
 	 * Returns the implementation of query.
 	 * 

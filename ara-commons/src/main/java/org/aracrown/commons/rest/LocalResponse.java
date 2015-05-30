@@ -41,7 +41,7 @@ public final class LocalResponse {
 		if (LOGGER.isWarnEnabled()) {
 			LOGGER.warn(String.format("Mapping the exception of status: %s, Error message: %s", errorStatus, throwable.getMessage()), throwable);
 		}
-		return Response.status(errorStatus).entity(new RestException(throwable)).header(RestException.X_MAPPED_EXCEPTION_HEADER, Boolean.TRUE)
+		return Response.status(errorStatus).entity(new ExceptionResource(throwable)).header(ExceptionResource.X_MAPPED_EXCEPTION_HEADER, Boolean.TRUE)
 				.build();
 	}
 }

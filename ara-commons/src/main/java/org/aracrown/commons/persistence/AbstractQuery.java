@@ -77,7 +77,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 */
 	public AbstractQuery(EntityManager entityManager, T path) {
 		this.path = path;
-		jpaQuery = new JPAQuery(entityManager).from(path);
+		jpaQuery = new JPAQuery(entityManager).from(path).setHint(ORG_HIBERNATE_CACHEABLE, true);
 	}
 
 	protected <P, Z extends EntityPath<P>> Z validateFrom(Z alias) {
@@ -273,6 +273,16 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	@SuppressWarnings("unchecked")
 	@Override
 	public <Q extends Query<K>> Q createdBy(String username) {
+		return (Q) this;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <Q extends Query<K>> Q distinct() {
+		getQuery().distinct();
 		return (Q) this;
 	}
 }

@@ -18,6 +18,8 @@ package org.aracrown.commons.rest;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.QueryParam;
 
+import org.aracrown.commons.util.OrderType;
+
 /**
  * Simple query filter definition.
  * 
@@ -30,23 +32,6 @@ public class ResourceFilter {
 
 	/** Default page size. */
 	private static final long DEFAULT_PAGE_SIZE = 10L;
-
-	/**
-	 * Order defines ascending and descending order.
-	 * 
-	 * @author vicento.ramos
-	 * 
-	 */
-	public enum OrderType {
-		/**
-		 * Ascending order.
-		 */
-		ASC,
-		/**
-		 * Descending order.
-		 */
-		DESC;
-	}
 
 	/** Page number to query. */
 	@QueryParam("f")

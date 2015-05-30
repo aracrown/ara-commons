@@ -41,7 +41,7 @@ public class EntityValidationException extends RuntimeException {
 
 	/** The set of constraint violations. */
 	private final Set<? extends ConstraintViolation<?>> constraintViolations;
-
+	
 	/**
 	 * Default constructor takes constraint violation collection.
 	 * 
@@ -73,6 +73,9 @@ public class EntityValidationException extends RuntimeException {
 	 */
 	@Override
 	public String toString() {
-		return ConstraintViolationBuilder.get().parseViolations(constraintViolations).toString();
+		if (constraintViolations != null && !constraintViolations.isEmpty()) {
+			return ConstraintViolationBuilder.get().parseViolations(constraintViolations).toString();
+		}
+		return getMessage();
 	}
 }

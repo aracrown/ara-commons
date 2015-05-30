@@ -4,11 +4,8 @@
 .project
 .settings
 target
-<<<<<<< HEAD
 *.log
 .DS_Store
-=======
 *.idea
 *.iml
 *.log
->>>>>>> refs/heads/release-1.0.4

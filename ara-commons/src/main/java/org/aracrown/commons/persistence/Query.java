@@ -79,4 +79,11 @@ public interface Query<T> {
 	 * @return this instance
 	 */
 	<Q extends Query<T>> Q createdBy(String username);
+	
+	/**
+	 * Executes distinct query.
+	 * 
+	 * @return this query instance
+	 */
+	<Q extends Query<T>> Q distinct();
 }

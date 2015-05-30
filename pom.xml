@@ -4,23 +4,23 @@
 	<groupId>org.aracrown</groupId>
 	<artifactId>commons-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.5-SNAPSHOT</version>
+	<version>1.0.5</version>
 	<name>ara | commons</name>
 	<description>Java EE Server side component for managing sport types, leagues, teams and players.</description>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<querydsl.version>3.5.1</querydsl.version>
+		<querydsl.version>3.6.3</querydsl.version>
 		<guava.version>18.0</guava.version>
-        <liquibase.version>3.1.1</liquibase.version>
-        <owner.version>1.0.5.1</owner.version>
-        <gson.version>2.3</gson.version>
-        <freemarker.version>2.3.21</freemarker.version>
+        	<liquibase.version>3.1.1</liquibase.version>
+        	<owner.version>1.0.5.1</owner.version>
+        	<gson.version>2.3</gson.version>
+        	<freemarker.version>2.3.21</freemarker.version>
         
         
-		<ara-dependencies-test.version>1.0.5-SNAPSHOT</ara-dependencies-test.version>
-		<ara-dependencies-provided.version>1.0.5-SNAPSHOT</ara-dependencies-provided.version>
-        <ara-dependencies-wicket.version>1.0.5-SNAPSHOT</ara-dependencies-wicket.version>
+		<ara-dependencies-test.version>1.0.5</ara-dependencies-test.version>
+		<ara-dependencies-provided.version>1.0.5</ara-dependencies-provided.version>
+        <ara-dependencies-wicket.version>1.0.5</ara-dependencies-wicket.version>
 	</properties>
 	
 	<licenses>
@@ -44,12 +44,12 @@
   		<repository>
      			<id>deployment</id>
      			<name>Internal Releases</name>
-     			<url>http://www.aracrown.org/nexus/content/repositories/releases/</url>
+     			<url>http://www.aracrown.com/nexus/content/repositories/releases/</url>
   		</repository>
   		<snapshotRepository>
      			<id>deployment</id>
      			<name>Internal snapshots</name>
-     			<url>http://www.aracrown.org/nexus/content/repositories/snapshots/</url>
+     			<url>http://www.aracrown.com/nexus/content/repositories/snapshots/</url>
   		</snapshotRepository>
 	</distributionManagement>
 	
@@ -93,7 +93,7 @@
 			<!-- Query DSL -->
             <dependency>
                 <groupId>com.mysema.querydsl</groupId>
-                <artifactId>querydsl-jpa</artifactId>
+		<artifactId>querydsl-jpa</artifactId>
                 <version>${querydsl.version}</version>
                 <exclusions>
                         <exclusion>

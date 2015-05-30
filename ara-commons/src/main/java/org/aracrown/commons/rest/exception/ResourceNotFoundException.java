@@ -13,23 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.aracrown.commons.persistence.exception;
+package org.aracrown.commons.rest.exception;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
 
 /**
- * The class <i>EntityConstraintViolationException</i> is a checked exception. It is used to notify the caller when entity constraint violation
- * occurs.
+ * Exception to be thrown when resource is not found.
  * 
  * @author vicento.ramos
  * 
  * @since 1.0.0
  * 
  */
-public class EntityConstraintViolationException extends EntityValidationException {
-
+public class ResourceNotFoundException extends ResourceException {
 	/**
 	 * 
 	 */
@@ -41,20 +36,20 @@ public class EntityConstraintViolationException extends EntityValidationExceptio
 	 * @param message
 	 *            the detail message (which is saved for later retrieval by the Throwable.getMessage() method).
 	 */
-	public EntityConstraintViolationException(String message) {
-		super(message, null);
+	public ResourceNotFoundException(String message) {
+		super(message);
 	}
-	
+
 	/**
-	 * Default constructor takes constraint violation collection.
+	 * Constructs a new exception with the specified detail message and cause.
 	 * 
 	 * @param message
-	 *            the detail message. The detail message is saved for later
-	 *            retrieval by the {@link #getMessage()} method.
-	 * @param constraintViolations
-	 *            set of unsorted violations
+	 *            message the detail message (which is saved for later retrieval by the {@link #getMessage()} method).
+	 * @param cause
+	 *            the cause (which is saved for later retrieval by the {@link #getCause()} method). (A <tt>null</tt> value is permitted, and indicates
+	 *            that the cause is nonexistent or unknown.)
 	 */
-	public EntityConstraintViolationException(String message, Set<? extends ConstraintViolation<?>> constraintViolations) {
-		super(message, constraintViolations);
+	public ResourceNotFoundException(String message, Throwable cause) {
+		super(message, cause);
 	}
 }
