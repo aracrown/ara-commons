@@ -145,7 +145,7 @@ public class ResourceCollectionResponse<E> {
 		return this;
 	}
 
-	private ResourceCollectionResponse<E> page(Long currentPage, Long pageSize) {
+	public ResourceCollectionResponse<E> page(Long currentPage, Long pageSize) {
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
 		return this;
