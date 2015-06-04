@@ -236,6 +236,8 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 		setProvider(principal.getProvider());
 		setSocialIdentifier(principal.getSocialIdentifier());
 		setUniqueIdentifier(principal.getUniqueIdentifier());
+		setLastLoginDate(principal.getLastLoginDate());
+		setLastLoginHostName(principal.getLastLoginHostName());
 	}
 	
 	public String getIsoLastLoginDate() {
