@@ -79,6 +79,7 @@ public final class Exceptions {
 	 *            cause type to check
 	 * @param <X>
 	 *            exception type to search for
+	 * @return true if throwable contains requested exception
 	 */
 	public <X extends Throwable> boolean contains(Throwable throwable, Class<X> class1) {
 		Iterable<X> i = Iterables.filter(Throwables.getCausalChain(throwable), class1);

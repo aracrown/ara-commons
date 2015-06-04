@@ -1,8 +1,8 @@
 package org.aracrown.commons.persistence.joins;
 
-import com.mysema.query.jpa.impl.JPAQuery;
-import com.mysema.query.types.EntityPath;
-import com.mysema.query.types.Path;
+import com.querydsl.core.types.EntityPath;
+import com.querydsl.core.types.Path;
+import com.querydsl.jpa.impl.JPAQuery;
 
 public abstract class Join<T, Z extends Path<T>> {
 	private final EntityPath<T> target;
@@ -21,7 +21,7 @@ public abstract class Join<T, Z extends Path<T>> {
 		return alias;
 	}
 
-	public abstract void addJoin(JPAQuery jpaQuery);
+	public abstract void addJoin(JPAQuery<?> jpaQuery);
 
 	/**
 	 * @return the target

@@ -75,6 +75,8 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	/**
 	 * Returns entity by it's primary key.
 	 * 
+	 * @param <P>
+	 *            primary key as generic parameter
 	 * @param primaryKey
 	 *            primary key
 	 * @return the found entity instance or null if the entity does not exist
@@ -93,6 +95,8 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	/**
 	 * Saves the entity.
 	 * 
+	 * @param <E>
+	 *            entity type to be used for saving purposes.
 	 * @param entity
 	 *            object to save
 	 * @return the managed instance that the state was merged to
@@ -125,6 +129,8 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	/**
 	 * Remove the entity instance.
 	 * 
+	 * @param <E>
+	 *            entity type to be used for deletion purposes.
 	 * @param entity
 	 *            entity instance to remove
 	 */

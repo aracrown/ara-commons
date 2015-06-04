@@ -22,8 +22,6 @@ package org.aracrown.commons.persistence;
  * 
  * @author vicento.ramos
  * 
- * @param <T>
- * 
  * @since 1.0.0
  */
 public interface UpdateQuery {

@@ -98,7 +98,7 @@
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>
 			<artifactId>wicket-bootstrap-extensions</artifactId>
-			<version>0.10.0</version>
+			<version>0.9.7</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>antlr</artifactId>

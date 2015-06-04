@@ -15,7 +15,6 @@
  */
 package org.aracrown.commons.persistence.exception;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -31,15 +30,6 @@ public class EntityValidationExceptionTest {
 		Set<? extends ConstraintViolation<?>> constraintViolations = Validation.buildDefaultValidatorFactory().getValidator()
 				.validate(new FakeEntity());
 		EntityValidationException ex = new EntityValidationException(constraintViolations);
-		org.junit.Assert.assertEquals("Name is missing", ex.toString());
-	}
-	
-	@Test
-	public void testEntityValidationExceptionMessageOnly() {
-		EntityValidationException ex = new EntityValidationException("Name is missing", null);
-		org.junit.Assert.assertEquals("Name is missing", ex.toString());
-		
-		ex = new EntityValidationException("Name is missing", new HashSet<>());
 		org.junit.Assert.assertEquals("Name is missing", ex.toString());
 	}
 }
