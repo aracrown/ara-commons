@@ -20,6 +20,8 @@ import com.google.gson.Gson;
 
 @Named
 public class RecaptchaValidator {
+	private static final String SUCCESS = "success";
+
 	private static final String RESPONSE = "g-recaptcha-response";
 
 	private static final String RECAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s&remoteip=user_ip_address";
@@ -28,6 +30,13 @@ public class RecaptchaValidator {
 
 	@Inject
 	private HttpClient httpClient;
+
+	public RecaptchaValidator() {
+	}
+
+	RecaptchaValidator(HttpClient httpClient) {
+		this.httpClient = httpClient;
+	}
 
 	public boolean isValid(HttpServletRequest request, String privateKey) {
 		String recaptcha = request.getParameter(RESPONSE);
@@ -53,7 +62,7 @@ public class RecaptchaValidator {
 				result.append(line);
 			}
 			Map<String, Object> props = new Gson().fromJson(result.toString(), Map.class);
-			return (Boolean) props.get("success");
+			return (Boolean) props.get(SUCCESS);
 		} catch (IOException e) {
 			LOGGER.error("Error while contacting google site for client ip: {}", remoteIpAddress, e);
 		}

@@ -8,6 +8,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.google.common.base.Preconditions;
+
 public class MailSender {
 	private final Session mailSession;
 
@@ -16,7 +18,7 @@ public class MailSender {
 	private String subject;
 
 	private String content;
-	
+
 	private String from;
 
 	public MailSender(Session mailSession) {
@@ -37,13 +39,15 @@ public class MailSender {
 		this.content = outputContent;
 		return this;
 	}
-	
+
 	public MailSender from(String from) {
 		this.from = from;
 		return this;
 	}
 
 	public void send() throws MessagingException {
+		Preconditions.checkNotNull(emailTo, "Email to is missing");
+		Preconditions.checkNotNull(subject, "Subject is missing");
 		MimeMessage m = new MimeMessage(mailSession);
 		Address[] to = new InternetAddress[] { new InternetAddress(emailTo) };
 
@@ -53,6 +57,10 @@ public class MailSender {
 		m.setSentDate(new java.util.Date());
 
 		m.setContent(content, "text/html; charset=UTF-8");
+		sendInternal(m);
+	}
+
+	void sendInternal(MimeMessage m) throws MessagingException {
 		Transport.send(m);
 	}
 

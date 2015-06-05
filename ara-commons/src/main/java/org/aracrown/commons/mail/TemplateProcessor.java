@@ -19,10 +19,17 @@ import freemarker.template.TemplateException;
 @Named
 public class TemplateProcessor {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TemplateProcessor.class);
-	
+
 	@Inject
 	private ProxiedParam<Configuration> templateConfiguration;
-	
+
+	public TemplateProcessor() {
+	}
+
+	TemplateProcessor(ProxiedParam<Configuration> templateConfiguration) {
+		this.templateConfiguration = templateConfiguration;
+	}
+
 	public String processTemplate(String templateName, Map<String, String> params) throws TemplateProcessorException {
 		try {
 			Template template = templateConfiguration.getParam().getTemplate(templateName);
@@ -30,10 +37,9 @@ public class TemplateProcessor {
 			template.process(params, out);
 			return out.toString();
 		} catch (IOException | TemplateException e) {
-			LOGGER.error("Error occured while trying to process template {}", templateName,  e);
+			LOGGER.error("Error occured while trying to process template {}", templateName, e);
 			throw new TemplateProcessorException("Error occured while trying to process template.", e);
 		}
 
-		
 	}
 }

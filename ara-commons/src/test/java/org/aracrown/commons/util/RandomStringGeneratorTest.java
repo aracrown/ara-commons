@@ -21,4 +21,14 @@ public class RandomStringGeneratorTest {
 			Assert.assertTrue(rnd, rnd.matches("^[a-zA-Z0-9+@\\-_#$!:;|&%()*]+$"));
 		}
 	}
+	
+	@Test
+	public void testLettersNumbers() {
+		for (int i = 0; i < 100; i++) {
+			String rnd = new RandomStringGenerator().generateLettersNumbers(15);
+			Assert.assertNotNull(rnd);
+			Assert.assertEquals(15, rnd.length());
+			Assert.assertTrue(rnd, rnd.matches("^[a-zA-Z0-9]+$"));
+		}
+	}
 }

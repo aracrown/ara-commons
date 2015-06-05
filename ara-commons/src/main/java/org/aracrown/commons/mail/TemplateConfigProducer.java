@@ -28,6 +28,13 @@ public class TemplateConfigProducer {
 	@TemplateDirectory
 	private Instance<ProxiedParam<String>> templateDirectory;
 
+	public TemplateConfigProducer() {
+	}
+
+	TemplateConfigProducer(Instance<ProxiedParam<String>> templateDirectory) {
+		this.templateDirectory = templateDirectory;
+	}
+
 	@Produces
 	@ApplicationScoped
 	public ProxiedParam<Configuration> produceConfiguration() {
@@ -47,7 +54,7 @@ public class TemplateConfigProducer {
 
 	private TemplateLoader[] getTemplateLoaders() {
 		ClassTemplateLoader ctl = new ClassTemplateLoader(getClass(), "/templates");
-		
+
 		String templateDir = resolveTemplateDir();
 		try {
 			if (!Strings.isNullOrEmpty(templateDir)) {
@@ -61,7 +68,7 @@ public class TemplateConfigProducer {
 	}
 
 	private String resolveTemplateDir() {
-		if (templateDirectory.isUnsatisfied()) {
+		if (templateDirectory == null || templateDirectory.isUnsatisfied()) {
 			LOGGER.warn("Configuration issue for @TemplateDirectory: Parameter was not created.");
 			return null;
 		}
