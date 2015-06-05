@@ -15,11 +15,12 @@
  */
 package org.aracrown.commons.util;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class OrderTypeTest {
 	@Test
 	public void testDefault() {
-		org.junit.Assert.assertNotNull(OrderType.values());
+		Assert.assertEquals(OrderType.ASC, OrderType.valueOf(OrderType.ASC.toString()));
 	}
 }
