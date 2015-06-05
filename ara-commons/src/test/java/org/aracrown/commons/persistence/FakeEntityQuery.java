@@ -20,6 +20,11 @@ public class FakeEntityQuery extends AbstractQuery<QFakeEntity, FakeEntity> {
 		QFakeEntity q = new QFakeEntity("test2");
 		q = validateJoin(QFakeEntity.fakeEntity, q);
 	}
+	
+	public void testSetJoin() {
+		QFakeEntity q = new QFakeEntity("test311");
+		q = validateJoin(Expressions.setPath(FakeEntity.class, QFakeEntity.class, PathMetadataFactory.forVariable("fakeEntity")), q);
+	}
 
 	public void testListJoin() {
 		QFakeEntity q = new QFakeEntity("test3");
@@ -30,6 +35,11 @@ public class FakeEntityQuery extends AbstractQuery<QFakeEntity, FakeEntity> {
 	public void testLeftJoin() {
 		QFakeEntity q = new QFakeEntity("test31");
 		q = validateLeftJoin(QFakeEntity.fakeEntity, q);
+	}
+	
+	public void testLeftJoin2() {
+		QFakeEntity q = new QFakeEntity("test32");
+		validateLeftJoin(Expressions.listPath(FakeEntity.class, QFakeEntity.class, PathMetadataFactory.forVariable("fakeEntity")), q);
 	}
 
 	public void testCollectionJoin() {

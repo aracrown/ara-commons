@@ -26,10 +26,18 @@ public class FakeEntityQueryTest extends AbstractDaoTest {
 		query.testFrom();
 		query.testJoin();
 		query.testJoin();
+		
+		query.testSetJoin();
+		query.testSetJoin();
+		
 		query.testListJoin();
 		query.testListJoin();
 		query.testLeftJoin();
 		query.testLeftJoin();
+		
+		query.testLeftJoin2();
+		query.testLeftJoin2();
+		
 		query.testCollectionJoin();
 		query.testCollectionJoin();
 	}
@@ -46,7 +54,7 @@ public class FakeEntityQueryTest extends AbstractDaoTest {
 
 	@Test
 	public void testList() {
-		Assert.assertEquals(0, new FakeEntityQuery(em).name("test").list().size());
+		Assert.assertEquals(0, new FakeEntityQuery(em).name("test").createdBy("test").distinct().list().size());
 	}
 
 	@Test
