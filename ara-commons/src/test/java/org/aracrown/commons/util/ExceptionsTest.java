@@ -15,6 +15,8 @@
  */
 package org.aracrown.commons.util;
 
+import org.aracrown.commons.rest.exception.ResourceNotFoundException;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ExceptionsTest {
@@ -46,5 +48,34 @@ public class ExceptionsTest {
 			Exceptions.get().throwNewIfContains(e, IllegalStateException.class, new RuntimeException("message"));
 			org.junit.Assert.assertTrue(true);
 		}
+	}
+	
+	@Test
+	public void testCheckIfContains() {
+		Assert.assertTrue(Exceptions.get().contains(new IllegalStateException(), IllegalStateException.class));
+	}
+	
+	@Test
+	public void testCheckIfNotContains() {
+		Assert.assertFalse(Exceptions.get().contains(new IllegalStateException(), ResourceNotFoundException.class));
+	}
+	
+	@Test
+	public void testPropagate() {
+		try {
+			Exceptions.get().propagate(new IllegalStateException(), IllegalStateException.class);
+		} catch (IllegalStateException e) {
+			org.junit.Assert.assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void testNoPropagate() {
+		try {
+			Exceptions.get().propagate(new IllegalStateException(), ResourceNotFoundException.class);
+		} catch (IllegalStateException e) {
+			org.junit.Assert.fail();
+		}
+		org.junit.Assert.assertTrue(true);
 	}
 }

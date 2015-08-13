@@ -90,4 +90,13 @@ public class FakeEntityDaoTest extends AbstractDaoTest {
 		e = dao.save(e);
 		new FakeEntityDao1(e).deleteById(e.getId());
 	}
+	
+	@Test
+	public void testMerge() throws EntitySaveException, EntityDeleteException {
+		FakeEntityDao dao = newFakeEntityDao();
+		FakeEntity e = new FakeEntity();
+		e.setName("test name");
+		e = dao.merge(e);
+		Assert.assertNotNull(e);
+	}
 }

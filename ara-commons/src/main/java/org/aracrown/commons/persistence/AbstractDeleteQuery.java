@@ -2,8 +2,8 @@ package org.aracrown.commons.persistence;
 
 import javax.persistence.EntityManager;
 
-import com.mysema.query.jpa.impl.JPADeleteClause;
-import com.mysema.query.types.path.EntityPathBase;
+import com.querydsl.core.types.dsl.EntityPathBase;
+import com.querydsl.jpa.impl.JPADeleteClause;
 
 /**
  * Abstract DELETE query implementation using QueryDSL project.

@@ -24,6 +24,7 @@ import java.util.List;
  * @author vicento.ramos
  * 
  * @param <T>
+ *            entity type for a generic solution
  * 
  * @since 1.0.0
  */
@@ -51,6 +52,12 @@ public interface Query<T> {
 	/**
 	 * Disable caching for concrete query.
 	 * 
+	 * @param <Q>
+	 *            returning a Query type based result. Usually it means
+	 * 
+	 *            <pre>
+	 * return this;
+	 * </pre>
 	 * @return this query instance
 	 */
 	<Q extends Query<T>> Q disableCaching();
@@ -68,7 +75,7 @@ public interface Query<T> {
 	 * @return how many records found
 	 */
 	Long count();
-	
+
 	/**
 	 * Filters entities by provided user, who created entity.
 	 * 
@@ -79,10 +86,16 @@ public interface Query<T> {
 	 * @return this instance
 	 */
 	<Q extends Query<T>> Q createdBy(String username);
-	
+
 	/**
 	 * Executes distinct query.
 	 * 
+	 * @param <Q>
+	 *            returning a Query type based result. Usually it means
+	 * 
+	 *            <pre>
+	 * return this;
+	 * </pre>
 	 * @return this query instance
 	 */
 	<Q extends Query<T>> Q distinct();

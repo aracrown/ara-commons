@@ -30,13 +30,12 @@ public class AuthenticatedPrincipalTest {
 		
 		AuthenticatedPrincipal p2 = new AuthenticatedPrincipal(p);
 		assertPrincipal(p2);
-		Assert.assertEquals(null,p2.getLastLoginDate());
-		Assert.assertEquals(null,p2.getRemoteAddress());
 		Assert.assertEquals(Boolean.TRUE,p2.hasProfile());
 		Assert.assertEquals(Boolean.TRUE,p2.isAuthenticated());
 		Assert.assertEquals(Boolean.TRUE,p2.isPersisted());
 		Assert.assertEquals(Boolean.FALSE,p2.isSocialIdentifierSameAsName());
 		Assert.assertEquals(Boolean.FALSE,p2.isExternal());
+		
 		
 		p2.remoteAddress("127.0.0.1");
 		Assert.assertEquals("127.0.0.1",p2.getRemoteAddress());
@@ -107,6 +106,10 @@ public class AuthenticatedPrincipalTest {
 		Assert.assertEquals(Boolean.TRUE,p.isPersisted());
 		
 		Assert.assertEquals(IdentityProviderType.INTERNAL,p.getProvider());
+		
+		Assert.assertEquals("Dec 6, 2013 9:45:00 PM",p.getIsoLastLoginDate());
+		Assert.assertEquals("localhost",p.getLastLoginHostName());
+		
 	}
 	
 	class PrincipalBuilder extends AuthenticatedPrincipalBuilder {

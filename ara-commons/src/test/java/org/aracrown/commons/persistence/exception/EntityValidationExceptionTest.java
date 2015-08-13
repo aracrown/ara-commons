@@ -15,12 +15,14 @@
  */
 package org.aracrown.commons.persistence.exception;
 
+import java.util.Collections;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 
 import org.aracrown.commons.persistence.FakeEntity;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class EntityValidationExceptionTest {
@@ -31,5 +33,19 @@ public class EntityValidationExceptionTest {
 				.validate(new FakeEntity());
 		EntityValidationException ex = new EntityValidationException(constraintViolations);
 		org.junit.Assert.assertEquals("Name is missing", ex.toString());
+	}
+	
+	@Test
+	public void testEntityValidationExceptionNull() {
+		Assert.assertNull(new EntityValidationException(null).toString());
+		
+		EntityValidationException ex = new EntityValidationException("Test", null);
+		org.junit.Assert.assertEquals("Test", ex.toString());
+	}
+	
+	@Test
+	public void testEntityValidationExceptionEmpty() {
+		EntityValidationException ex = new EntityValidationException("Test", Collections.emptySet());
+		org.junit.Assert.assertEquals("Test", ex.toString());
 	}
 }

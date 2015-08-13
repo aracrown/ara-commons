@@ -25,7 +25,9 @@ import java.util.List;
  * @since 1.0.0
  * 
  * @param <S>
+ *            source object
  * @param <T>
+ *            target object
  */
 public abstract class ResourceCollectionTransformation<S, T> {
 
@@ -56,7 +58,7 @@ public abstract class ResourceCollectionTransformation<S, T> {
 		target.setTotal(totalCount);
 		return (I) this;
 	}
-	
+
 	/**
 	 * Sets the total count of items for this query result.
 	 * 
@@ -83,13 +85,13 @@ public abstract class ResourceCollectionTransformation<S, T> {
 	 */
 	@SuppressWarnings("unchecked")
 	public <I extends ResourceCollectionTransformation<S, T>> I page(Long first, Long pageSize) {
-		target.setCurrentPage(first);
-		target.setPageSize(pageSize);
+		target.page(first, pageSize);
 		return (I) this;
 	}
 
 	/**
-	 * Transforms collection of persistable entities into RESTful resource collection.
+	 * Transforms collection of persistable entities into RESTful resource
+	 * collection.
 	 * 
 	 * @param queryResults
 	 *            source collection to transform

@@ -7,6 +7,7 @@ public class TimeZoneEnumTest {
 	@Test
 	public void testDefault() {
 		TimeZoneEnum tz = TimeZoneEnum.GMTM0100_AMERICA_SCORESBYSUND;
+		Assert.assertNotNull(TimeZoneEnum.values());
 		Assert.assertEquals("GMTM0100_AMERICA_SCORESBYSUND", tz.name());
 		Assert.assertEquals("GMT-01:00", tz.getGmt());
 		Assert.assertEquals("America/Scoresbysund", tz.getTimeZoneId());

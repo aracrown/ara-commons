@@ -2,8 +2,8 @@ package org.aracrown.commons.persistence;
 
 import javax.persistence.EntityManager;
 
-import com.mysema.query.types.path.CollectionPath;
-import com.mysema.query.types.path.ListPath;
+import com.querydsl.core.types.PathMetadataFactory;
+import com.querydsl.core.types.dsl.Expressions;
 
 public class FakeEntityQuery extends AbstractQuery<QFakeEntity, FakeEntity> {
 
@@ -20,22 +20,31 @@ public class FakeEntityQuery extends AbstractQuery<QFakeEntity, FakeEntity> {
 		QFakeEntity q = new QFakeEntity("test2");
 		q = validateJoin(QFakeEntity.fakeEntity, q);
 	}
+	
+	public void testSetJoin() {
+		QFakeEntity q = new QFakeEntity("test311");
+		q = validateJoin(Expressions.setPath(FakeEntity.class, QFakeEntity.class, PathMetadataFactory.forVariable("fakeEntity")), q);
+	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void testListJoin() {
 		QFakeEntity q = new QFakeEntity("test3");
-		q = validateJoin(new ListPath(FakeEntity.class, QFakeEntity.class, "fakeEntity"), q);
+
+		q = validateJoin(Expressions.listPath(FakeEntity.class, QFakeEntity.class, PathMetadataFactory.forVariable("fakeEntity")), q);
 	}
-	
+
 	public void testLeftJoin() {
 		QFakeEntity q = new QFakeEntity("test31");
 		q = validateLeftJoin(QFakeEntity.fakeEntity, q);
 	}
+	
+	public void testLeftJoin2() {
+		QFakeEntity q = new QFakeEntity("test32");
+		validateLeftJoin(Expressions.listPath(FakeEntity.class, QFakeEntity.class, PathMetadataFactory.forVariable("fakeEntity")), q);
+	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void testCollectionJoin() {
 		QFakeEntity q = new QFakeEntity("test4");
-		q = validateJoin(new CollectionPath(FakeEntity.class, QFakeEntity.class, "fakeEntity"), q);
+		q = validateJoin(Expressions.collectionPath(FakeEntity.class, QFakeEntity.class, PathMetadataFactory.forVariable("fakeEntity")), q);
 	}
 
 	FakeEntityQuery name(String name) {

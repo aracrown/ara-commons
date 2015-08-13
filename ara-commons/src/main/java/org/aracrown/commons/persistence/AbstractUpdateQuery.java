@@ -2,8 +2,8 @@ package org.aracrown.commons.persistence;
 
 import javax.persistence.EntityManager;
 
-import com.mysema.query.jpa.impl.JPAUpdateClause;
-import com.mysema.query.types.path.EntityPathBase;
+import com.querydsl.core.types.dsl.EntityPathBase;
+import com.querydsl.jpa.impl.JPAUpdateClause;
 
 /**
  * Abstract UPDATE query implementation using QueryDSL project.

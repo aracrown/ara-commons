@@ -35,7 +35,10 @@ public interface SecurityService extends Serializable {
 	 * @param token
 	 *            the username and password combination, submitted for
 	 *            authentication
-	 * @return authenticated principal instance with proper information populated.
+	 * @return authenticated principal instance with proper information
+	 *         populated.
+	 * @throws AuthenticationException
+	 *             exception is thrown if authentication failed.
 	 */
 	AuthenticatedPrincipal authenticate(UsernamePasswordToken token) throws AuthenticationException;
 

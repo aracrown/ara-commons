@@ -16,7 +16,6 @@
 package org.aracrown.commons.rest;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -135,17 +134,8 @@ public class ResourceCollectionResponse<E> {
 		this.currentPage = currentPage;
 	}
 
-	public void addItems(Collection<E> itemsToAdd) {
-		items.addAll(itemsToAdd);
-		setCount((long) items.size());
-	}
-
-	public ResourceCollectionResponse<E> totalCount(Long totalCount) {
-		this.total = totalCount;
-		return this;
-	}
-
-	private ResourceCollectionResponse<E> page(Long currentPage, Long pageSize) {
+	
+	public ResourceCollectionResponse<E> page(Long currentPage, Long pageSize) {
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
 		return this;

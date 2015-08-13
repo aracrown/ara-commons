@@ -24,14 +24,14 @@ import org.aracrown.commons.persistence.joins.InnerJoin;
 import org.aracrown.commons.persistence.joins.Join;
 import org.aracrown.commons.persistence.joins.LeftJoin;
 
-import com.mysema.query.QueryModifiers;
-import com.mysema.query.jpa.impl.JPAQuery;
-import com.mysema.query.types.EntityPath;
-import com.mysema.query.types.Path;
-import com.mysema.query.types.path.CollectionPath;
-import com.mysema.query.types.path.EntityPathBase;
-import com.mysema.query.types.path.ListPath;
-import com.mysema.query.types.path.SetPath;
+import com.querydsl.core.QueryModifiers;
+import com.querydsl.core.types.EntityPath;
+import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.CollectionPath;
+import com.querydsl.core.types.dsl.EntityPathBase;
+import com.querydsl.core.types.dsl.ListPath;
+import com.querydsl.core.types.dsl.SetPath;
+import com.querydsl.jpa.impl.JPAQuery;
 
 /**
  * Abstract query implementation using QueryDSL project.
@@ -50,7 +50,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	/**
 	 * The JPA query instance.
 	 */
-	private final JPAQuery jpaQuery;
+	private final JPAQuery<K> jpaQuery;
 
 	/**
 	 * The entity path.
@@ -77,7 +77,8 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 */
 	public AbstractQuery(EntityManager entityManager, T path) {
 		this.path = path;
-		jpaQuery = new JPAQuery(entityManager).from(path).setHint(ORG_HIBERNATE_CACHEABLE, true);
+		jpaQuery = new JPAQuery<>(entityManager);
+		jpaQuery.from(path);
 	}
 
 	protected <P, Z extends EntityPath<P>> Z validateFrom(Z alias) {
@@ -92,6 +93,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
 	 *
+	 * @param <P>
+	 *            entity type parameter
+	 * @param <Z>
+	 *            path type parameter
 	 * @param target
 	 *            entity field as a target
 	 * @param alias
@@ -114,6 +119,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
 	 *
+	 * @param <P>
+	 *            entity type parameter
+	 * @param <Z>
+	 *            path type parameter
 	 * @param target
 	 *            entity field as a target
 	 * @param alias
@@ -127,7 +136,11 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	/**
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
-	 *
+	 * 
+	 * @param <P>
+	 *            entity type parameter
+	 * @param <Z>
+	 *            path type parameter
 	 * @param target
 	 *            entity field as a target
 	 * @param alias
@@ -146,6 +159,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
 	 *
+	 * @param <P>
+	 *            entity type parameter
+	 * @param <Z>
+	 *            path type parameter
 	 * @param target
 	 *            entity field as a target
 	 * @param alias
@@ -164,6 +181,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
 	 *
+	 * @param <P>
+	 *            entity type parameter
+	 * @param <Z>
+	 *            path type parameter
 	 * @param target
 	 *            entity field as a target
 	 * @param alias
@@ -182,6 +203,10 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 * Checks if there is already existing join. Useful if there is no need for
 	 * duplicate joins.
 	 *
+	 * @param <P>
+	 *            entity type parameter
+	 * @param <Z>
+	 *            path type parameter
 	 * @param target
 	 *            entity field as a target
 	 * @param alias
@@ -196,7 +221,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 		return alias;
 	}
 
-	private JPAQuery prepareQuery() {
+	private JPAQuery<K> prepareQuery() {
 		onBeforeExecute();
 		return jpaQuery;
 	}
@@ -210,7 +235,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 */
 	@Override
 	public K singleResult() {
-		return prepareQuery().setHint(ORG_HIBERNATE_CACHEABLE, cacheable).singleResult(path);
+		return prepareQuery().setHint(ORG_HIBERNATE_CACHEABLE, cacheable).fetchFirst();
 	}
 
 	/**
@@ -218,7 +243,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 */
 	@Override
 	public List<K> list() {
-		return prepareQuery().list(path);
+		return prepareQuery().fetch();
 	}
 
 	/**
@@ -226,7 +251,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 */
 	@Override
 	public Long count() {
-		return prepareQuery().count();
+		return prepareQuery().fetchCount();
 	}
 
 	/**
@@ -234,7 +259,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	 *
 	 * @return the jpaQuery
 	 */
-	public JPAQuery getQuery() {
+	public JPAQuery<K> getQuery() {
 		return jpaQuery;
 	}
 
@@ -266,7 +291,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 		this.cacheable = false;
 		return (Q) this;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -275,7 +300,7 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 	public <Q extends Query<K>> Q createdBy(String username) {
 		return (Q) this;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
