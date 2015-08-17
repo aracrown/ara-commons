@@ -183,5 +183,11 @@ public class AuthenticatedPrincipalTest {
 			return this;
 		}
 		
+		@Override
+		protected AuthenticatedPrincipalBuilder apiKey() {
+			getEntity().setApiKey("API_KEY");
+			return this;
+		}
+		
 	}
 }

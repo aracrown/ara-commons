@@ -35,6 +35,13 @@ public abstract class ResourceCollectionTransformation<S, T> {
 	private final ResourceCollectionResponse<T> target;
 
 	/**
+	 * Default constructor.
+	 */
+	public ResourceCollectionTransformation() {
+		this.target = null;
+	}
+
+	/**
 	 * Default constructor with REST resource created.
 	 * 
 	 * @param target
@@ -120,4 +127,8 @@ public abstract class ResourceCollectionTransformation<S, T> {
 	 * @return newly RESTful resource
 	 */
 	public abstract T tranformSingle(S item);
+
+	public S transformBack(T item) {
+		throw new RuntimeException("Not supported by abstract class!");
+	}
 }

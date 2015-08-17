@@ -15,6 +15,8 @@
  */
 package org.aracrown.commons.bean;
 
+import java.lang.annotation.Annotation;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
@@ -36,6 +38,9 @@ public class BeanResolver<T> implements AutoCloseable {
 	/** The bean type to resolve. */
 	private final Class<T> clz;
 
+	/** the optional qualifiers */
+	private final Annotation[] qualifiers;
+
 	/** The bean context for destroying later. */
 	private CreationalContext<T> creationalContext;
 
@@ -47,6 +52,20 @@ public class BeanResolver<T> implements AutoCloseable {
 	 */
 	public BeanResolver(Class<T> clz) {
 		this.clz = clz;
+		this.qualifiers = new Annotation[]{};
+	}
+
+	/**
+	 * Default constructor.
+	 * 
+	 * @param clz
+	 *            the required bean type
+	 * @param qualifiers
+	 *            the optional qualifiers
+	 */
+	public BeanResolver(Class<T> clz, Annotation... qualifiers) {
+		this.clz = clz;
+		this.qualifiers = qualifiers;
 	}
 
 	/**
@@ -54,7 +73,8 @@ public class BeanResolver<T> implements AutoCloseable {
 	 * 
 	 * @return resolved bean instance
 	 * @throws BeanResolveException
-	 *             exception is thrown if something bad happens when trying to resolve the bean
+	 *             exception is thrown if something bad happens when trying to
+	 *             resolve the bean
 	 */
 	public T getBean() throws BeanResolveException {
 		if (instance == null) {
@@ -67,7 +87,12 @@ public class BeanResolver<T> implements AutoCloseable {
 	private T resolveBean() throws BeanResolveException {
 		try {
 			BeanManager beanManager = (BeanManager) new InitialContext().lookup("java:comp/BeanManager");
-			Bean<T> bean = (Bean<T>) beanManager.resolve(beanManager.getBeans(clz));
+			Bean<T> bean = null;
+			if (qualifiers != null) {
+				bean = (Bean<T>) beanManager.resolve(beanManager.getBeans(clz, qualifiers));
+			} else {
+				bean = (Bean<T>) beanManager.resolve(beanManager.getBeans(clz));
+			}
 			creationalContext = beanManager.createCreationalContext(null);
 			return bean.create(creationalContext);
 		} catch (NamingException e) {

@@ -48,6 +48,9 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 
 	private String socialIdentifier;
 	
+	/** Application api key if exists. */
+	private String apiKey;
+	
 	public AuthenticatedPrincipal() {
 		
 	}
@@ -256,5 +259,19 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	 */
 	public void setLastLoginHostName(String lastLoginHostName) {
 		this.lastLoginHostName = lastLoginHostName;
+	}
+
+	/**
+	 * @return the apiKey
+	 */
+	public String getApiKey() {
+		return apiKey;
+	}
+
+	/**
+	 * @param apiKey the apiKey to set
+	 */
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
 	}
 }

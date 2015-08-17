@@ -24,7 +24,7 @@
 			<artifactId>querydsl-core</artifactId>
 			<version>4.0.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
@@ -41,6 +41,13 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.2.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.deltaspike.core</groupId>
+			<artifactId>deltaspike-core-impl</artifactId>
+			<version>1.5.0</version>  
 		</dependency>
 	</dependencies>
 </project>
