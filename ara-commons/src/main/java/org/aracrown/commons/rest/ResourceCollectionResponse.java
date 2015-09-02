@@ -135,15 +135,24 @@ public class ResourceCollectionResponse<E> {
 		this.currentPage = currentPage;
 	}
 
-	
 	public ResourceCollectionResponse<E> page(Long currentPage, Long pageSize) {
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
 		return this;
 	}
-	
+
 	public void addItems(Collection<E> itemsToAdd) {
 		items.addAll(itemsToAdd);
 		setCount((long) items.size());
+	}
+	
+	public static <T> ResourceCollectionResponse<T> of(Long first, Long pageSize, Long totalCount, Collection<T> items) {
+		ResourceCollectionResponse<T> result = new ResourceCollectionResponse<>();
+		result.page(first, pageSize);
+		result.setTotal(totalCount);
+		if (!items.isEmpty()) {
+			result.addItems(items);
+		}
+		return result;
 	}
 }

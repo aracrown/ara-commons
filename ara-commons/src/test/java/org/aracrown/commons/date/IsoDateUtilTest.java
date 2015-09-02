@@ -42,12 +42,12 @@ public class IsoDateUtilTest {
 
 		Assert.assertEquals("Jan 1, 1990 9:00:00 PM", IsoDateUtil.get().format(date, Locale.ENGLISH, ZoneId.of("Australia/Sydney")));
 
-		Assert.assertEquals("1990-01-01Z", IsoDateUtil.get().formatNoTime(date));
+		Assert.assertEquals("1990-01-01Z", IsoDateUtil.get().formatDate(date));
 
-		Assert.assertEquals("2012-02-15Z", IsoDateUtil.get().formatNoTime(IsoDateUtil.get().parseNoTime("2012-02-15")));
+		Assert.assertEquals("2012-02-15Z", IsoDateUtil.get().formatDate(IsoDateUtil.get().parseNoTime("2012-02-15")));
 
 		Assert.assertNull(IsoDateUtil.get().format(null, Locale.ENGLISH, ZoneId.of("Australia/Sydney")));
-		Assert.assertNull(IsoDateUtil.get().formatNoTime(null));
+		Assert.assertNull(IsoDateUtil.get().formatDate(null));
 		Assert.assertNull(IsoDateUtil.get().parseNoTime(null));
 
 		// Check midnight format for specific date

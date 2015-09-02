@@ -33,7 +33,8 @@ import org.slf4j.LoggerFactory;
  * 
  * @param <T>
  *            entity type, which will be managed by this instance
- * @param <Q>
+ * @param
+ * 			<Q>
  *            Query type, used by this data access object
  * @since 1.0.0
  * 
@@ -75,7 +76,8 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	/**
 	 * Returns entity by it's primary key.
 	 * 
-	 * @param <P>
+	 * @param
+	 * 			<P>
 	 *            primary key as generic parameter
 	 * @param primaryKey
 	 *            primary key
@@ -86,8 +88,8 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	public <P> T byId(P primaryKey) throws EntityNotFoundException {
 		T entity = getEntityManager().find(getEntityClass(), primaryKey);
 		if (entity == null) {
-			throw new EntityNotFoundException(String.format("Entity of type [%s] with primary key [%s] was not found.", getEntityClass()
-					.getSimpleName().toLowerCase(), primaryKey));
+			throw new EntityNotFoundException(String.format("Entity of type [%s] with primary key [%s] was not found.",
+					getEntityClass().getSimpleName().toLowerCase(), primaryKey));
 		}
 		return entity;
 	}
@@ -134,9 +136,17 @@ public abstract class AbstractDao<T, Q extends Query<T>> {
 	 * @param entity
 	 *            entity instance to remove
 	 */
-	public <E> void delete(E entity) {
-		E entityToDelete = getEntityManager().merge(entity);
-		getEntityManager().remove(entityToDelete);
+	public <E> void delete(E entity) throws EntityDeleteException {
+		try {
+			E entityToDelete = getEntityManager().merge(entity);
+			getEntityManager().remove(entityToDelete);
+		} catch (PersistenceException e) {
+			String message = String.format("Persistence exception occurred when trying to delete the entity [%s].", entity.toString());
+			LOGGER.error(message, e);
+			EntityDeleteException newException = new EntityDeleteException(message, e);
+			Exceptions.get().throwNewIfContains(e, ConstraintViolationException.class, newException);
+			throw newException;
+		}
 	}
 
 	/**

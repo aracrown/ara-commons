@@ -112,7 +112,7 @@ public class SignInPanel extends Panel {
 				setResponsePage(getApplication().getHomePage());
 			} catch (AuthenticationException e ) {
 				LOGGER.error(String.format("Could not authenticate user: %s", getUsername()), e);
-				error(getLocalizer().getString(e.getMessageKey(), SignInPanel.this, e.getMessage()));
+				error(getLocalizer().getString(e.getMessage(), SignInPanel.this, e.getMessage()));
 				Component feedback = get(FEEDBACK);
 				feedback.setVisible(true);
 			}

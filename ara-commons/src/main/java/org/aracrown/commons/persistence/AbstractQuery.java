@@ -79,6 +79,11 @@ public abstract class AbstractQuery<T extends EntityPathBase<K>, K> implements Q
 		this.path = path;
 		jpaQuery = new JPAQuery<>(entityManager);
 		jpaQuery.from(path);
+		enableCaching();
+	}
+
+	private void enableCaching() {
+		jpaQuery.setHint(ORG_HIBERNATE_CACHEABLE, true);
 	}
 
 	protected <P, Z extends EntityPath<P>> Z validateFrom(Z alias) {

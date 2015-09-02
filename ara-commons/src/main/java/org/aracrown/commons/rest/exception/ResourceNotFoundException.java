@@ -15,7 +15,6 @@
  */
 package org.aracrown.commons.rest.exception;
 
-
 /**
  * Exception to be thrown when resource is not found.
  * 
@@ -24,7 +23,7 @@ package org.aracrown.commons.rest.exception;
  * @since 1.0.0
  * 
  */
-public class ResourceNotFoundException extends ResourceException {
+public class ResourceNotFoundException extends PlainResourceException {
 	/**
 	 * 
 	 */
@@ -34,7 +33,8 @@ public class ResourceNotFoundException extends ResourceException {
 	 * Constructs a new exception with the specified detail message.
 	 * 
 	 * @param message
-	 *            the detail message (which is saved for later retrieval by the Throwable.getMessage() method).
+	 *            the detail message (which is saved for later retrieval by the
+	 *            Throwable.getMessage() method).
 	 */
 	public ResourceNotFoundException(String message) {
 		super(message);
@@ -43,13 +43,18 @@ public class ResourceNotFoundException extends ResourceException {
 	/**
 	 * Constructs a new exception with the specified detail message and cause.
 	 * 
-	 * @param message
-	 *            message the detail message (which is saved for later retrieval by the {@link #getMessage()} method).
+	 * @param messageKey
+	 *            message key for localization purposes
+	 * @param description
+	 *            message the detail message (which is saved for later retrieval
+	 *            by the {@link #getMessage()} method).
 	 * @param cause
-	 *            the cause (which is saved for later retrieval by the {@link #getCause()} method). (A <tt>null</tt> value is permitted, and indicates
-	 *            that the cause is nonexistent or unknown.)
+	 *            the cause (which is saved for later retrieval by the
+	 *            {@link #getCause()} method). (A <tt>null</tt> value is
+	 *            permitted, and indicates that the cause is nonexistent or
+	 *            unknown.)
 	 */
-	public ResourceNotFoundException(String message, Throwable cause) {
-		super(message, cause);
+	public ResourceNotFoundException(String messageKey, String description) {
+		super(messageKey, description);
 	}
 }

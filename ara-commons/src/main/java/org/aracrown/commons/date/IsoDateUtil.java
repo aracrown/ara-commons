@@ -46,7 +46,12 @@ public final class IsoDateUtil {
 	 * Support for date and time with 'HHmm', for example,
 	 * '2010-01-01T10:00:00+0200'
 	 */
-	private static final String ISO_OFFSET_DATE_TIME_XX = "yyyy-MM-dd'T'HH:mm:ssXX";
+	public static final String ISO_OFFSET_DATE_TIME_XX = "yyyy-MM-dd'T'HH:mm:ssXX";
+
+	/**
+	 * Support for date, for example, '2010-01-01'
+	 */
+	public static final String ISO_DATE = "yyyy-MM-dd";
 
 	/** The singleton instance. */
 	private static IsoDateUtil instance;
@@ -156,12 +161,22 @@ public final class IsoDateUtil {
 		return ZonedDateTime.parse(dateString, df);
 	}
 
-	public String formatNoTime(ZonedDateTime date) {
+	public String formatDate(ZonedDateTime date) {
 		if (date == null) {
 			return null;
 		}
 
 		DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+
+		return formatter.format(date);
+	}
+	
+	public String formatTime(ZonedDateTime date) {
+		if (date == null) {
+			return null;
+		}
+
+		DateTimeFormatter formatter = DateTimeFormatter.ISO_TIME;
 
 		return formatter.format(date);
 	}
@@ -174,14 +189,14 @@ public final class IsoDateUtil {
 		DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
 
 		LocalDate localDate = LocalDate.parse(value, formatter);
-		
+
 		return ZonedDateTime.of(localDate, LocalTime.now(), ZoneOffset.UTC);
 	}
 
 	public ZonedDateTime midnight(ZonedDateTime dateTime) {
 		return dateTime.withHour(0).withMinute(0).withSecond(0).withNano(0);
 	}
-	
+
 	public ZonedDateTime midnight() {
 		return midnight(ZonedDateTime.now());
 	}

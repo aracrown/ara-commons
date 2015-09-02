@@ -1,6 +1,8 @@
 package org.aracrown.commons.date;
 
 import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.HashMap;
 
 /**
  * Customized time zone.
@@ -211,6 +213,10 @@ public enum TimeZoneEnum {
 
 	public ZoneId getZoneId() {
 		return ZoneId.of(timeZoneId);
+	}
+	
+	public ZoneOffset getZoneOffset() {
+		return ZoneOffset.of (gmt.substring(3));
 	}
 
 }

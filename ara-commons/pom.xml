@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-core</artifactId>
-			<version>4.0.1</version>
+			<version>${querydsl.version}</version>
 		</dependency>
 
 		<dependency>

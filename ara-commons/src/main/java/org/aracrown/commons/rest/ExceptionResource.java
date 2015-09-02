@@ -32,6 +32,9 @@ public class ExceptionResource implements Serializable {
 	/** The exception message. */
 	private String exceptionMessage;
 
+	/** The exception description if available. */
+	private String description;
+
 	/**
 	 * Default constructor.
 	 */
@@ -43,10 +46,13 @@ public class ExceptionResource implements Serializable {
 	 * 
 	 * @param throwable
 	 *            exception as input to be able to construct the entity
+	 * @param description
+	 *            error description if available
 	 */
-	public ExceptionResource(Throwable throwable) {
+	public ExceptionResource(Throwable throwable, String description) {
 		this.exceptionClassName = throwable.getClass().getName();
 		this.exceptionMessage = throwable.getMessage();
+		this.description = description;
 		if (Strings.isNullOrEmpty(this.exceptionMessage)) {
 			this.exceptionMessage = UNKNOWN_ERROR;
 		}
@@ -81,4 +87,20 @@ public class ExceptionResource implements Serializable {
 	public void setExceptionClassName(String exceptionClassName) {
 		this.exceptionClassName = exceptionClassName;
 	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 }

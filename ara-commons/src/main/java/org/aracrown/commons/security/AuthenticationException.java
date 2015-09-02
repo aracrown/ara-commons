@@ -1,5 +1,7 @@
 package org.aracrown.commons.security;
 
+import org.aracrown.commons.rest.exception.PlainResourceException;
+
 /**
 * Exception is thrown when the Subject was not able to authenticate properly.
 * 
@@ -8,14 +10,11 @@ package org.aracrown.commons.security;
 * @since 1.0.0
 * 
 */
-public class AuthenticationException extends Exception {
+public class AuthenticationException extends PlainResourceException {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/** The message key, used when trying to localize the error message. */
-	private final String messageKey;
 
 	/**
 	 * Constructs a new exception with the specified detail message.
@@ -25,23 +24,8 @@ public class AuthenticationException extends Exception {
 	 */
 	public AuthenticationException(String messageKey) {
 		super(messageKey);
-		this.messageKey = messageKey;
 	}
-
-	/**
-	 * Constructs a new exception with the specified detail message and cause.
-	 * 
-	 * @param messageKey
-	 *            the key to be used when localizing the authentication message
-	 * @param cause
-	 *            the cause (which is saved for later retrieval by the {@link #getCause()} method). (A <tt>null</tt> value is permitted, and indicates
-	 *            that the cause is nonexistent or unknown.)
-	 */
-	public AuthenticationException(String messageKey, Throwable cause) {
-		super(messageKey, cause);
-		this.messageKey = messageKey;
-	}
-
+	
 	/**
 	 * Constructs a new exception with the specified detail message.
 	 * 
@@ -51,9 +35,8 @@ public class AuthenticationException extends Exception {
 	 *            message the detail message (which is saved for later retrieval by the {@link #getMessage()} method).
 	 */
 	public AuthenticationException(String messageKey, String defaultMessage) {
-		super(defaultMessage);
-		this.messageKey = messageKey;
-	}
+		super(messageKey, defaultMessage);
+	}	
 
 	/**
 	 * Constructs a new exception with the specified detail message and cause.
@@ -67,16 +50,7 @@ public class AuthenticationException extends Exception {
 	 *            that the cause is nonexistent or unknown.)
 	 */
 	public AuthenticationException(String messageKey, String defaultMessage, Throwable cause) {
-		super(defaultMessage, cause);
-		this.messageKey = messageKey;
+		super(messageKey, defaultMessage, cause);
 	}
-
-	/**
-	 * @return the messageKey
-	 */
-	public String getMessageKey() {
-		return messageKey;
-	}
-
 }
 

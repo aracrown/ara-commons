@@ -110,4 +110,26 @@ public final class Exceptions {
 			throw i.iterator().next();
 		}
 	}
+
+	/**
+	 * Returns {@code throwable} for a cause of type {@code class1}. Returns
+	 * null if not found.
+	 *
+	 * @param throwable
+	 *            exception to check for cause type
+	 * @param class1
+	 *            cause type to check
+	 * @param <X>
+	 *            exception type to be re-thrown
+	 * @throws X
+	 *             exception thrown if cause type was found in chain
+	 */
+	public <X extends Throwable> X getCause(Throwable throwable, Class<X> class1) throws X {
+		Iterable<X> i = Iterables.filter(Throwables.getCausalChain(throwable), class1);
+		// Do not expect null here.
+		if (i.iterator().hasNext()) {
+			return i.iterator().next();
+		}
+		return null;
+	}
 }

@@ -35,7 +35,7 @@ public class FakeEntityDaoTest extends AbstractDaoTest {
 	}
 
 	@Test
-	public void testSaveDelete() throws EntitySaveException, EntityNotFoundException {
+	public void testSaveDelete() throws EntitySaveException, EntityNotFoundException, EntityDeleteException {
 		FakeEntityDao dao = newFakeEntityDao();
 		FakeEntity e = new FakeEntity();
 		e.setName("test name");

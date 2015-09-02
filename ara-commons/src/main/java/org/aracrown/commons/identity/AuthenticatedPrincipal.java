@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.aracrown.commons.date.IsoDateUtil;
+import org.aracrown.commons.date.TimeZoneEnum;
 import org.aracrown.commons.identity.adapters.LocaleXmlAdapter;
 import org.aracrown.commons.identity.adapters.ZoneIdXmlAdapter;
 import org.aracrown.commons.identity.adapters.ZonedDateTimeXmlAdapter;
@@ -37,6 +38,8 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 
 	@XmlJavaTypeAdapter(ZoneIdXmlAdapter.class)
 	private ZoneId zoneId;
+	
+	private TimeZoneEnum timezone;
 
 	@XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
 	private ZonedDateTime lastLoginDate;
@@ -133,6 +136,9 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	 * @return the zoneId
 	 */
 	public ZoneId getZoneId() {
+		if (this.zoneId == null) {
+			return ZoneId.systemDefault();
+		}
 		return zoneId;
 	}
 
@@ -273,5 +279,22 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 	 */
 	public void setApiKey(String apiKey) {
 		this.apiKey = apiKey;
+	}
+
+	/**
+	 * @return the timezone
+	 */
+	public TimeZoneEnum getTimezone() {
+		if (timezone == null) {
+			return TimeZoneEnum.GMTP0200_EUROPE_ATHENS;
+		}
+		return timezone;
+	}
+
+	/**
+	 * @param timezone the timezone to set
+	 */
+	public void setTimezone(TimeZoneEnum timezone) {
+		this.timezone = timezone;
 	}
 }

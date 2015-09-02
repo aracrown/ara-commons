@@ -1,5 +1,6 @@
 package org.aracrown.commons.rest;
 
+import org.aracrown.commons.rest.exception.PlainResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,16 +21,24 @@ public final class LocalResponse {
 
 	private final Status errorStatus;
 	private final Throwable throwable;
+	private final String description;
 
 	/**
 	 * Constructor to {@link javax.ws.rs.core.Response} object.
 	 *
-	 * @param errorStatus error status code
-	 * @param throwable   exception thrown
+	 * @param errorStatus
+	 *            error status code
+	 * @param throwable
+	 *            exception thrown
 	 */
 	public LocalResponse(Status errorStatus, Throwable throwable) {
 		this.errorStatus = errorStatus;
 		this.throwable = throwable;
+		if (throwable instanceof PlainResourceException) {
+			this.description = ((PlainResourceException)throwable).getDescription();
+		} else {
+			this.description = null;
+		}
 	}
 
 	/**
@@ -38,10 +47,10 @@ public final class LocalResponse {
 	 * @return built response instance
 	 */
 	public Response build() {
-		if (LOGGER.isWarnEnabled()) {
-			LOGGER.warn(String.format("Mapping the exception of status: %s, Error message: %s", errorStatus, throwable.getMessage()), throwable);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug(String.format("Mapping the exception of status: %s, Error message: %s", errorStatus, throwable.getMessage()), throwable);
 		}
-		return Response.status(errorStatus).entity(new ExceptionResource(throwable)).header(ExceptionResource.X_MAPPED_EXCEPTION_HEADER, Boolean.TRUE)
+		return Response.status(errorStatus).entity(new ExceptionResource(throwable, description)).header(ExceptionResource.X_MAPPED_EXCEPTION_HEADER, Boolean.TRUE)
 				.build();
 	}
 }
