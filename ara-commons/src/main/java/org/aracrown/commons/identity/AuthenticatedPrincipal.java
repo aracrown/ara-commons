@@ -242,6 +242,7 @@ public class AuthenticatedPrincipal extends UserPrincipal {
 		setLastName(principal.getLastName());
 		setZoneId(principal.getZoneId());
 		setLocale(principal.getLocale());
+		setTimezone(principal.getTimezone());
 		setProvider(principal.getProvider());
 		setSocialIdentifier(principal.getSocialIdentifier());
 		setUniqueIdentifier(principal.getUniqueIdentifier());
