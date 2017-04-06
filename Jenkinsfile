@@ -3,10 +3,10 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        build 'test'
+        sh 'mvn install'
       }
     }
-    stage('') {
+    stage('error') {
       steps {
         mail(subject: 'test', body: 'trs', to: 'turisto@gmail.com')
       }
