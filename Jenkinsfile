@@ -8,7 +8,7 @@ pipeline {
     }
     stage('error') {
       steps {
-        mail(subject: 'test', body: 'trs', to: 'turisto@gmail.com')
+        echo 'hi'
       }
     }
   }
